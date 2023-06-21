@@ -1,4 +1,4 @@
-package com.example.pet_coctails.activity
+package com.example.pet_coctails.activity.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

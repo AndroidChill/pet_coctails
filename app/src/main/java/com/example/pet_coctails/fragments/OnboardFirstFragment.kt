@@ -14,8 +14,6 @@ class OnboardFirstFragment : Fragment() {
     private lateinit var binding: FragmentOnboardFirstBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-//        binding = FragmentOnboardFirstBinding.inflate(inflater, container, false)
-//        return binding.root
         return inflater.inflate(R.layout.fragment_onboard_first, container, false)
     }
 

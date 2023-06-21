@@ -12,12 +12,12 @@
         android:theme="@style/Theme.Pet_Coctails"
         tools:targetApi="31">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.main.MainActivity"
             android:exported="true">
 
         </activity>
 
-        <activity android:name=".activity.OnboardActivity"
+        <activity android:name=".activity.Onboard.OnboardActivity"
             android:exported="true">
 
             <intent-filter>
