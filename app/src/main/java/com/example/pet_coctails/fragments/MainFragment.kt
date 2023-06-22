@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.pet_coctails.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
 /* такого фрагмента нет в лейаутах, вот и не работает

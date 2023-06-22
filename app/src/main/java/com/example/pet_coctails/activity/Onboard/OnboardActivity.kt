@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import com.example.pet_coctails.core.abstraction.BaseActivity
 import com.example.pet_coctails.features.auth.BaseApplication
 import com.example.pet_coctails.databinding.ActivityOnboardingBinding
+import com.example.pet_coctails.features.auth.di.DaggerAuthComponent
 
 class OnboardActivity : BaseActivity<ActivityOnboardingBinding, OnboardViewModel>() {
 
