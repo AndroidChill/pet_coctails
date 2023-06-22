@@ -1,12 +1,25 @@
 package com.example.pet_coctails.activity.main
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.example.pet_coctails.R
+import android.view.LayoutInflater
+import com.example.pet_coctails.core.abstraction.BaseActivity
+import com.example.pet_coctails.databinding.ActivityMainBinding
+import com.example.pet_coctails.features.auth.BaseApplication
+import com.example.pet_coctails.features.auth.di.DaggerAuthComponent
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+
+    override val getViewBinding: (LayoutInflater) -> ActivityMainBinding
+        get() = ActivityMainBinding::inflate
+
+    override val getViewModelClass: Class<MainViewModel>
+        get() = MainViewModel::class.java
+
+    override fun setupDaggerComponent() {
+        val authComponent = DaggerAuthComponent
+            .builder()
+            .coreComponent((application as BaseApplication).getCoreComponent())
+            .build()
+
+        authComponent.inject(this)
     }
 }

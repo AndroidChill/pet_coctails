@@ -17,7 +17,7 @@
 
         </activity>
 
-        <activity android:name=".activity.Onboard.OnboardActivity"
+        <activity android:name=".activity.onboard.OnboardActivity"
             android:exported="true">
 
             <intent-filter>

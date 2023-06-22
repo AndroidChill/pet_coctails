@@ -2,7 +2,7 @@ package ru.social.rom_dv.features.auth.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.pet_coctails.activity.Onboard.OnboardViewModel
+import com.example.pet_coctails.activity.onboard.OnboardViewModel
 import com.example.pet_coctails.activity.main.MainViewModel
 import com.example.pet_coctails.core.annotation.ViewModelKey
 import com.example.pet_coctails.core.factory.ViewModelFactory
