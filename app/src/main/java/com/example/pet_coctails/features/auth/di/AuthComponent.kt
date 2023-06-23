@@ -13,7 +13,7 @@ import ru.social.rom_dv.features.auth.di.AuthViewModelModule
 @Component(
     dependencies = [CoreComponent::class],
     modules = [
-        NetworkModule::class,
+//        NetworkModule::class,
         RepositoryModule::class,
         AuthViewModelModule::class
     ]
