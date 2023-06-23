@@ -7,6 +7,7 @@ import com.example.pet_coctails.activity.main.MainActivity
 import com.example.pet_coctails.activity.onboard.OnboardActivity
 import com.example.pet_coctails.core.scope.CoreComponent
 import com.example.pet_coctails.di.component.ApplicationComponent
+import com.example.pet_coctails.di.component.DaggerApplicationComponent
 import com.example.pet_coctails.di.module.ApplicationModule
 import com.example.pet_coctails.features.auth.BaseApplication
 
