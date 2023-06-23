@@ -5,21 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.pet_coctails.databinding.FragmentMainBinding
+import com.example.pet_coctails.R
+import com.example.pet_coctails.databinding.FragmentCocktailsListBinding
 
-class MainFragment : Fragment() {
-/* такого фрагмента нет в лейаутах, вот и не работает
-* */
-    private lateinit var binding: FragmentMainBinding
+class CocktailsListFragment : Fragment() {
+
+    private lateinit var binding: FragmentCocktailsListBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentMainBinding.inflate(inflater, container, false)
-        return binding.root
+        return inflater.inflate(R.layout.fragment_cocktails_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-    }
 
+    }
 }

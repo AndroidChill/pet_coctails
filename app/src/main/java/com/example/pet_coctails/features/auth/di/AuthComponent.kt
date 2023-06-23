@@ -1,9 +1,10 @@
 package com.example.pet_coctails.features.auth.di
 
-import com.example.pet_coctails.activity.Onboard.OnboardActivity
+import com.example.pet_coctails.activity.onboard.OnboardActivity
+import com.example.pet_coctails.activity.main.MainActivity
 import com.example.pet_coctails.core.scope.CoreComponent
 import com.example.pet_coctails.core.scope.FeatureScope
-import com.example.pet_coctails.fragments.MainFragment
+import com.example.pet_coctails.fragments.CocktailsListFragment
 import com.example.pet_coctails.fragments.OnboardFirstFragment
 import dagger.Component
 import ru.social.rom_dv.features.auth.di.AuthViewModelModule
@@ -12,7 +13,7 @@ import ru.social.rom_dv.features.auth.di.AuthViewModelModule
 @Component(
     dependencies = [CoreComponent::class],
     modules = [
-        NetworkModule::class,
+//        NetworkModule::class,
         RepositoryModule::class,
         AuthViewModelModule::class
     ]
@@ -20,8 +21,9 @@ import ru.social.rom_dv.features.auth.di.AuthViewModelModule
 interface AuthComponent {
 
     fun inject(activity: OnboardActivity)
+    fun inject(activity: MainActivity)
     fun inject(fragment: OnboardFirstFragment)
-    fun inject(activity: MainFragment)
+    fun inject(activity: CocktailsListFragment)
 
 
 }

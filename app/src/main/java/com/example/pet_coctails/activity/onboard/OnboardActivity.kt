@@ -1,4 +1,4 @@
-package com.example.pet_coctails.activity.Onboard
+package com.example.pet_coctails.activity.onboard
 
 import android.view.LayoutInflater
 import com.example.pet_coctails.core.abstraction.BaseActivity

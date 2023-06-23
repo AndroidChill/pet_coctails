@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".RomApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,7 +18,7 @@
 
         </activity>
 
-        <activity android:name=".activity.Onboard.OnboardActivity"
+        <activity android:name=".activity.onboard.OnboardActivity"
             android:exported="true">
 
             <intent-filter>
