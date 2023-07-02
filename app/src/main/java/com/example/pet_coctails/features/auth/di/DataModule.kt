@@ -1,4 +1,4 @@
-package ru.social.rom_dv.features.auth.di
+package com.example.pet_coctails.features.auth.di
 
 import com.example.pet_coctails.core.scope.FeatureScope
 import com.example.pet_coctails.features.auth.domain.AuthRepository
@@ -6,7 +6,7 @@ import com.example.pet_coctails.features.auth.data.AuthApiService
 import com.example.pet_coctails.features.auth.domain.AuthUseCase
 import dagger.Module
 import dagger.Provides
-import ru.social.rom_dv.features.auth.data.AuthNetworkDataSource
+import com.example.pet_coctails.features.auth.data.AuthNetworkDataSource
 
 @Module
 object DataModule {

@@ -1,4 +1,4 @@
-package ru.social.rom_dv.features.auth.di
+package com.example.pet_coctails.features.auth.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

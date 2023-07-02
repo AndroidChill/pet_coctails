@@ -22,11 +22,4 @@ class OnboardActivity : BaseActivity<ActivityOnboardingBinding, OnboardViewModel
 
         authComponent.inject(this)
     }
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_onboarding)
-//
-//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-//
-//    }
 }

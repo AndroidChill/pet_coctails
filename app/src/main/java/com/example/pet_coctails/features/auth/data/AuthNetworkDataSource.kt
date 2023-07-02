@@ -1,4 +1,4 @@
-package ru.social.rom_dv.features.auth.data
+package com.example.pet_coctails.features.auth.data
 
 import com.example.pet_coctails.activity.main.MainRequest
 import com.example.pet_coctails.core.scope.FeatureScope

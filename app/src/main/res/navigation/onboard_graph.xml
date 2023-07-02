@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/onboardFirstFragment">
+    <fragment
+        android:id="@+id/onboardFirstFragment"
+        android:name="com.example.pet_coctails.fragments.OnboardFirstFragment"
+        android:label="OnboardFirstFragment" >
+        <action
+            android:id="@+id/action_onboardFirstFragment_to_onboardSecondFragment"
+            app:destination="@id/onboardSecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboardSecondFragment"
+        android:name="com.example.pet_coctails.fragments.OnboardSecondFragment"
+        android:label="OnboardSecondFragment" />
+</navigation>

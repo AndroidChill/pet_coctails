@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/onboardFirstFragment">
+    app:startDestination="@id/mainFragment">
+
     <fragment
-        android:id="@+id/onboardFirstFragment"
-        android:name="com.example.pet_coctails.fragments.OnboardFirstFragment"
-        android:label="OnboardFirstFragment" >
+        android:id="@+id/cocktailsListFragment"
+        android:name="com.example.pet_coctails.fragments.coctailsList.CocktailsListFragment"
+        android:label="CocktailsListFragment" >
         <action
-            android:id="@+id/action_onboardFirstFragment_to_onboardSecondFragment"
-            app:destination="@id/onboardSecondFragment" />
+            android:id="@+id/action_cocktailsListFragment_to_cocktailInfoFragment"
+            app:destination="@id/cocktailInfoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/onboardSecondFragment"
-        android:name="com.example.pet_coctails.fragments.OnboardSecondFragment"
-        android:label="OnboardSecondFragment" />
+        android:id="@+id/cocktailInfoFragment"
+        android:name="com.example.pet_coctails.fragments.CocktailInfoFragment"
+        android:label="CocktailInfoFragment" >
+        <action
+            android:id="@+id/action_cocktailInfoFragment_to_cocktailsListFragment"
+            app:destination="@id/cocktailsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.pet_coctails.fragments.MainFragment"
+        android:label="MainFragment" />
 </navigation>

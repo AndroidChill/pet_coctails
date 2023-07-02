@@ -1,6 +1,7 @@
 package com.example.pet_coctails.activity.main
 
 import android.view.LayoutInflater
+import androidx.fragment.app.FragmentManager
 import com.example.pet_coctails.core.abstraction.BaseActivity
 import com.example.pet_coctails.databinding.ActivityMainBinding
 import com.example.pet_coctails.features.auth.BaseApplication
@@ -22,4 +23,5 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         authComponent.inject(this)
     }
+
 }
