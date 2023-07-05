@@ -23,6 +23,7 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/iv_cocktail"
@@ -33,6 +34,7 @@
         android:id="@+id/tv_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="@+id/iv_cocktail"
@@ -43,7 +45,7 @@
         android:id="@+id/tv_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="20dp"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="@+id/iv_cocktail"
@@ -54,7 +56,7 @@
         android:id="@+id/tv_cocktail_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="20dp"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/iv_cocktail"
@@ -65,11 +67,23 @@
         android:id="@+id/tv_glass_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="20dp"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/iv_cocktail"
         app:layout_constraintStart_toEndOf="@id/tv_cocktail_type"
-        android:text="number of peoples"/>
+        android:text="glass type"/>
+
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/iv_cocktail"
+        app:layout_constraintStart_toEndOf="@id/tv_category"
+        tools:text="See cocktail info"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

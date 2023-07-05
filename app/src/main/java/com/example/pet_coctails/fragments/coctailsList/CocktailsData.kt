@@ -6,5 +6,6 @@ data class CocktailsData(
     val id: Int,
     val category: String,
     val cocktailType: String,
-    val glassType: String
+    val glassType: String,
+    val info: String
 )
