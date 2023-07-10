@@ -58,4 +58,5 @@ object NetworkModule {
     @FeatureScope
     fun provideAuthApiService(retrofit: Retrofit): AuthApiService = retrofit.create(AuthApiService::class.java)
 
+
 }

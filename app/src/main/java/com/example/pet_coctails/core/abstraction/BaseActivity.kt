@@ -30,7 +30,11 @@ abstract class BaseActivity<V: ViewBinding, VM: ViewModel> : AppCompatActivity()
         }
         setContentView(_binding?.root)
         _viewModel = ViewModelProvider(this, viewModelFactory)[getViewModelClass]
+
+        initUI()
     }
+
+    open fun initUI() {}
 
     abstract fun setupDaggerComponent()
 
