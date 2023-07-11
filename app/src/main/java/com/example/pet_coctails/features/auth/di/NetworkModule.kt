@@ -19,7 +19,7 @@ object NetworkModule {
     @BaseUrl
     @Provides
     @FeatureScope
-    fun provideBaseUrl(): String = "https://rom-dv-api.herokuapp.com/"
+    fun provideBaseUrl(): String = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
 
     @Provides
     @FeatureScope
@@ -57,5 +57,6 @@ object NetworkModule {
     @Provides
     @FeatureScope
     fun provideAuthApiService(retrofit: Retrofit): AuthApiService = retrofit.create(AuthApiService::class.java)
+
 
 }

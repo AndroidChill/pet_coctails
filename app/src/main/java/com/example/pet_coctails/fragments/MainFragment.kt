@@ -21,8 +21,8 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        parentFragmentManager.beginTransaction()
-            .replace(binding.container.id, CocktailsListFragment())
-            .commit()
+//        parentFragmentManager.beginTransaction()
+//            .replace(binding.container.id, CocktailsListFragment())
+//            .commit()
     }
 }

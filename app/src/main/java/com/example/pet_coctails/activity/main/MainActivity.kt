@@ -1,11 +1,12 @@
 package com.example.pet_coctails.activity.main
 
 import android.view.LayoutInflater
-import androidx.fragment.app.FragmentManager
+import com.example.pet_coctails.R
 import com.example.pet_coctails.core.abstraction.BaseActivity
 import com.example.pet_coctails.databinding.ActivityMainBinding
 import com.example.pet_coctails.features.auth.BaseApplication
 import com.example.pet_coctails.features.auth.di.DaggerAuthComponent
+import com.example.pet_coctails.fragments.MainFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
@@ -22,6 +23,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             .build()
 
         authComponent.inject(this)
+    }
+
+    override fun initUI() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, MainFragment())
+            .commit()
+
     }
 
 }

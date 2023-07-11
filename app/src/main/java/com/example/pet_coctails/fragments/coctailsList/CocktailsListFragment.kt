@@ -83,6 +83,7 @@ class CocktailsListFragment : Fragment(), CocktailsAdapter.Listener {
     }
 
     override fun onClick (cocktails: CocktailsViewHolder) {
-        findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailInfoFragment)
+
+        this@CocktailsListFragment.findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailInfoFragment)
     }
 }

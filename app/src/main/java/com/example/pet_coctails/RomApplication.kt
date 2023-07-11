@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.example.pet_coctails.activity.main.MainActivity
-import com.example.pet_coctails.activity.onboard.OnboardActivity
+import com.example.pet_coctails.activity.Onboard.OnboardActivity
 import com.example.pet_coctails.core.scope.CoreComponent
 import com.example.pet_coctails.di.component.ApplicationComponent
 import com.example.pet_coctails.di.component.DaggerApplicationComponent
@@ -29,33 +29,33 @@ class RomApplication : BaseApplication() {
         super.onCreate()
         injectDependencies()
 
-        registerActivityLifecycleCallbacks(object: ActivityLifecycleCallbacks {
-
-            override fun onActivityPreStarted(activity: Activity) {
-                super.onActivityPreStarted(activity)
-                if (activity is MainActivity && isWorkSleptActivity()){
-                    val intent = Intent (activity, OnboardActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                }
-            }
-
-            override fun onActivityCreated(p0: Activity, p1: Bundle?) {}
-
-            override fun onActivityStarted(p0: Activity) {}
-
-            override fun onActivityResumed(p0: Activity) {}
-
-            override fun onActivityPaused(p0: Activity) {}
-
-            override fun onActivityStopped(p0: Activity) {
-                timeClosed = System.currentTimeMillis()
-            }
-
-            override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {}
-
-            override fun onActivityDestroyed(p0: Activity) {}
-        })
+//        registerActivityLifecycleCallbacks(object: ActivityLifecycleCallbacks {
+//
+//            override fun onActivityPreStarted(activity: Activity) {
+//                super.onActivityPreStarted(activity)
+//                if (activity is MainActivity && isWorkSleptActivity()){
+//                    val intent = Intent (activity, OnboardActivity::class.java)
+//                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//                    startActivity(intent)
+//                }
+//            }
+//
+//            override fun onActivityCreated(p0: Activity, p1: Bundle?) {}
+//
+//            override fun onActivityStarted(p0: Activity) {}
+//
+//            override fun onActivityResumed(p0: Activity) {}
+//
+//            override fun onActivityPaused(p0: Activity) {}
+//
+//            override fun onActivityStopped(p0: Activity) {
+//                timeClosed = System.currentTimeMillis()
+//            }
+//
+//            override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {}
+//
+//            override fun onActivityDestroyed(p0: Activity) {}
+//        })
     }
 
     private fun isWorkSleptActivity(): Boolean {
