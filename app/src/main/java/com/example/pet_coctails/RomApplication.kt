@@ -1,10 +1,6 @@
 package com.example.pet_coctails
 
-import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
-import com.example.pet_coctails.activity.main.MainActivity
-import com.example.pet_coctails.activity.Onboard.OnboardActivity
+
 import com.example.pet_coctails.core.scope.CoreComponent
 import com.example.pet_coctails.di.component.ApplicationComponent
 import com.example.pet_coctails.di.component.DaggerApplicationComponent
