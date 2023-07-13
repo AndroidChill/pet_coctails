@@ -4,6 +4,7 @@ import com.example.pet_coctails.BuildConfig
 import com.example.pet_coctails.features.auth.data.AuthApiService
 import com.example.pet_coctails.features.auth.BaseUrl
 import com.example.pet_coctails.core.scope.FeatureScope
+import com.example.pet_coctails.fragments.coctailsList.api.CocktailsApiService
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -19,7 +20,7 @@ object NetworkModule {
     @BaseUrl
     @Provides
     @FeatureScope
-    fun provideBaseUrl(): String = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+    fun provideBaseUrl(): String = "www.thecocktaildb.com/api/json/v1/1"
 
     @Provides
     @FeatureScope
@@ -57,6 +58,11 @@ object NetworkModule {
     @Provides
     @FeatureScope
     fun provideAuthApiService(retrofit: Retrofit): AuthApiService = retrofit.create(AuthApiService::class.java)
+    @Provides
+    @FeatureScope
+    fun provideCocktailsApiService(retrofit: Retrofit): CocktailsApiService = retrofit.create(CocktailsApiService::class.java)
+
+
 
 
 }
