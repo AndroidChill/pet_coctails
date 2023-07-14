@@ -12,6 +12,11 @@ interface CocktailsApiService {
     )
 
     data class Cocktail(
-        val name: String
+        val imageLink: Int,
+        val cocktailName: String,
+        val id: Int,
+        val category: String,
+        val cocktailType: String,
+        val glassType: String
     )
 }
