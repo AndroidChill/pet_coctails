@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.Provides
 import com.example.pet_coctails.features.auth.data.AuthNetworkDataSource
 import com.example.pet_coctails.features.auth.data.CocktailsNetworkDataSource
-import com.example.pet_coctails.fragments.coctailsList.api.CocktailsApiService
+import com.example.pet_coctails.features.auth.data.CocktailsApiService
 import com.example.pet_coctails.fragments.coctailsList.api.CocktailsRepository
 import com.example.pet_coctails.fragments.coctailsList.api.CocktailsUseCase
 

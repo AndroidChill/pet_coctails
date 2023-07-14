@@ -1,4 +1,4 @@
-package com.example.pet_coctails.fragments.coctailsList.api
+package com.example.pet_coctails.features.auth.data
 
 import retrofit2.http.GET
 
