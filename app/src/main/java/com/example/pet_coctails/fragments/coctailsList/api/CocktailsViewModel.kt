@@ -6,31 +6,61 @@ import com.example.pet_coctails.MetaData
 import com.example.pet_coctails.activity.main.MainRequest
 import com.example.pet_coctails.activity.main.MainResponse
 import com.example.pet_coctails.core.scope.FeatureScope
+import com.example.pet_coctails.features.auth.data.Cocktail
 import com.example.pet_coctails.features.auth.domain.model.CocktailsListResponse
+import com.example.pet_coctails.fragments.coctailsList.api.CocktailsState.Action.OnClickCocktail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @FeatureScope
 class CocktailsViewModel @Inject constructor(
     private val cocktailsUseCase: CocktailsUseCase
-): ViewModel() {
+) : ViewModel() {
 
-    val result = MutableSharedFlow<CocktailsListResponse>()
+    private var _state = MutableStateFlow<CocktailsState>(CocktailsState())
+    val state = _state.asStateFlow()
 
-    val error = MutableSharedFlow<MetaData>()
+    init {
+        viewModelScope.launch {
+            getAllCocktails()
+        }
+    }
 
-    suspend fun main (request: MainRequest) {
-        viewModelScope.launch (Dispatchers.IO){
+    fun handleAction(action: CocktailsState.Action) {
+        when (action) {
+            is OnClickCocktail -> {
 
+            }
         }
     }
 
     suspend fun getAllCocktails() {
-        viewModelScope.launch {
-            val response = cocktailsUseCase.cocktailsList()
-            state.emit(response)
+//        viewModelScope.launch {
+        val response = cocktailsUseCase.cocktailsList()
+        _state.update { oldState ->
+            oldState.copy(
+                events = oldState.events + CocktailsState.Event.LoadAllCocktails(
+                    response.data
+                )
+            )
         }
+//        }
     }
+}
+
+data class CocktailsState(
+    val events: List<Event> = emptyList()
+) {
+
+    sealed class Event { class LoadAllCocktails(val data: List<Cocktail>) : Event()
+    }
+
+    sealed class Action { class OnClickCocktail(val id: Int) : Action()
+    }
+
 }

@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pet_coctails.R
 import com.example.pet_coctails.databinding.FragmentCocktailsListBinding
 
-/*Как viewModel вызывать? Наследоваться не хочет*/вфывыфв
+// TODO Как viewModel вызывать? Наследоваться не хочет
+
 class CocktailsListFragment : Fragment(), CocktailsAdapter.Listener {
 
     private lateinit var binding: FragmentCocktailsListBinding

@@ -63,7 +63,4 @@ object NetworkModule {
     fun provideCocktailsApiService(retrofit: Retrofit): CocktailsApiService = retrofit.create(
         CocktailsApiService::class.java)
 
-
-
-
 }
