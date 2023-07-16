@@ -19,7 +19,7 @@ object NetworkModule {
     @BaseUrl
     @Provides
     @FeatureScope
-    fun provideBaseUrl(): String = "www.thecocktaildb.com/api/json/v1/1"
+    fun provideBaseUrl(): String = "https://www.thecocktaildb.com/api/json/v1/1/"
 
     @Provides
     @FeatureScope
@@ -47,19 +47,13 @@ object NetworkModule {
     @Provides
     @FeatureScope
     fun provideRetrofit(okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory,@BaseUrl baseUrl: String): Retrofit {
+        
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
             .client(okHttpClient)
             .build()
     }
-
-    @Provides
-    @FeatureScope
-    fun provideAuthApiService(retrofit: Retrofit): CocktailsApiService = retrofit.create(CocktailsApiService::class.java)
-    @Provides
-    @FeatureScope
-    fun provideCocktailsApiService(retrofit: Retrofit): CocktailsApiService = retrofit.create(
-        CocktailsApiService::class.java)
+    
 
 }

@@ -13,6 +13,9 @@ import dagger.Component
     dependencies = [CoreComponent::class],
     modules = [
 //        NetworkModule::class,
+        NetworkModule::class,
+        NetworkCocktailsModule::class,
+        DataModule::class,
         RepositoryModule::class,
         AuthViewModelModule::class
     ]

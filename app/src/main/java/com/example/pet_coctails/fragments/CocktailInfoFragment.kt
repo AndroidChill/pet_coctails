@@ -14,6 +14,8 @@ class CocktailInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentCocktailInfoBinding
 
+    private var id: String? = ""
+    
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentCocktailInfoBinding.inflate(inflater, container, false)
         return binding.root
@@ -25,6 +27,11 @@ class CocktailInfoFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             findNavController().navigate(R.id.action_cocktailInfoFragment_to_cocktailsListFragment)
         }
+        
+        arguments?.apply {
+            id = getString("id", "")
+        }
 
     }
+    
 }

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pet_coctails.databinding.ItemCocktailBinding
 
-class CocktailsAdapter (val listener : Listener) : RecyclerView.Adapter<CocktailsViewHolder>() {
+class CocktailsAdapter (private val onClick: (String) -> Unit) : RecyclerView.Adapter<CocktailsViewHolder>() {
 
     private val data = mutableListOf<CocktailsData>()
 
@@ -28,13 +28,13 @@ class CocktailsAdapter (val listener : Listener) : RecyclerView.Adapter<Cocktail
 
     override fun onBindViewHolder(holder: CocktailsViewHolder, position: Int) {
         data[position].apply {
-            holder.itemCocktail(this.imageLink, this.cocktailName, this.id, this.category, this.cocktailType, this.glassType, this.info, listener)
+            holder.itemCocktail(this.imageLink, this.cocktailName, this.id, this.category, this.cocktailType, this.glassType)
+        }
+        
+        holder.itemView.setOnClickListener {
+            onClick(data[position].id)
         }
 
-    }
-
-    interface Listener {
-        fun onClick (cocktails : CocktailsViewHolder)
     }
 
 }

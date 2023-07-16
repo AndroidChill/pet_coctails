@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,49 +21,78 @@ import com.example.pet_coctails.databinding.FragmentCocktailsListBinding
 import com.example.pet_coctails.features.auth.BaseApplication
 import com.example.pet_coctails.features.auth.di.DaggerAuthComponent
 import com.example.pet_coctails.fragments.MainFragment
+import com.example.pet_coctails.fragments.coctailsList.api.CocktailsState
+import com.example.pet_coctails.fragments.coctailsList.api.CocktailsState.Action
+import com.example.pet_coctails.fragments.coctailsList.api.CocktailsState.Event.MoveToCocktailINfo
 import com.example.pet_coctails.fragments.coctailsList.api.CocktailsViewModel
+import kotlinx.coroutines.launch
 
 // TODO Происходит что-то странное в старых функциях
 
-class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, CocktailsViewModel>(), CocktailsAdapter.Listener {
+class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, CocktailsViewModel>(){
 
 //    private lateinit var binding: FragmentCocktailsListBinding
-
+    
     override val getViewBinding: (LayoutInflater) -> FragmentCocktailsListBinding
         get() = FragmentCocktailsListBinding::inflate
-
-    override val getViewModelClass: Class <CocktailsViewModel>
+    
+    override val getViewModelClass: Class<CocktailsViewModel>
         get() = CocktailsViewModel::class.java
-
-
+    
     override fun setupDaggerComponent() {
-        val authComponent = DaggerAuthComponent
-            .builder()
-            .coreComponent((application as BaseApplication).getCoreComponent())
+        val authComponent = DaggerAuthComponent.builder()
+            .coreComponent((requireActivity().application as BaseApplication).getCoreComponent())
             .build()
-
+        
         authComponent.inject(this)
     }
-
-    private val cocktailsAdapter = CocktailsAdapter(this)
-
+    
+    private lateinit var adapter: CocktailsAdapter
+    
     override fun initUI() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, MainFragment())
-            .commit()
+        // TODO ("дополнительно посмотреть разницук parentFragmentManger childFragmentManager")
+//        childFragmentManager.beginTransaction()
+//            .replace(R.id.container, MainFragment())
+//            .commit()
 
 //        cocktailsAdapter.addData(
 //
 //        )
-
-//        binding.rvCocktails.layoutManager = LinearLayoutManager(requireContext()) // todo а что не так?(
-
-        binding.rvCocktails.adapter = cocktailsAdapter
-
+        
+        adapter = CocktailsAdapter {
+            viewModel.handleAction(Action.OnClickCocktail(it))
+        }
+        
+        binding.rvCocktails.layoutManager =
+            LinearLayoutManager(requireContext()) // todo а что не так?(
+        
+        binding.rvCocktails.adapter = adapter
+        
+        lifecycleScope.launch {
+            viewModel.state.collect {
+                it.events.forEach { event ->
+                    when (event) {
+                        is CocktailsState.Event.LoadAllCocktails -> {
+                            adapter.addData(event.data.map {
+                                CocktailsData(
+                                    imageLink = "",
+                                    cocktailName = it.strDrink,
+                                    id = it.idDrink,
+                                    category = it.strCategory,
+                                    cocktailType = it.strAlcoholic,
+                                    glassType = it.strGlass
+                                )
+                            })
+                        }
+                        is MoveToCocktailINfo -> {
+                            findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailInfoFragment, Bundle().apply {
+                                putString("id", event.data.idDrink)
+                            })
+                        }
+                    }
+                }
+            }
+        }
     }
-
-    override fun onClick (cocktails: CocktailsViewHolder) {
-
-//        this@CocktailsListFragment.findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailInfoFragment) // todo а что не так?(
-    }
+    
 }
