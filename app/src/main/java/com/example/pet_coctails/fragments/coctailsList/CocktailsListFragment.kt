@@ -22,7 +22,7 @@ import com.example.pet_coctails.features.auth.di.DaggerAuthComponent
 import com.example.pet_coctails.fragments.MainFragment
 import com.example.pet_coctails.fragments.coctailsList.api.CocktailsViewModel
 
-// TODO Как viewModel вызывать? Наследоваться не хочет
+// TODO Происходит что-то странное в старых функциях
 
 class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, CocktailsViewModel>(), CocktailsAdapter.Listener {
 
@@ -55,7 +55,7 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
 //
 //        )
 
-        binding.rvCocktails.layoutManager = LinearLayoutManager(requireContext()) // todo а что не так?(
+//        binding.rvCocktails.layoutManager = LinearLayoutManager(requireContext()) // todo а что не так?(
 
         binding.rvCocktails.adapter = cocktailsAdapter
 
@@ -63,6 +63,6 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
 
     override fun onClick (cocktails: CocktailsViewHolder) {
 
-        this@CocktailsListFragment.findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailInfoFragment)
+//        this@CocktailsListFragment.findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailInfoFragment) // todo а что не так?(
     }
 }
