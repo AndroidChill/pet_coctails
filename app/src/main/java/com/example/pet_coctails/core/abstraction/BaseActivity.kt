@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import javax.inject.Inject
 
-abstract class BaseActivity<V: ViewBinding, VM: ViewModel> : AppCompatActivity() {
+abstract class BaseActivity <V: ViewBinding, VM: ViewModel> : AppCompatActivity() {
 
     private var _binding: V? = null
     protected val binding: V

@@ -10,14 +10,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-//    private val coctailsUseCase: CoctailsUSeCase
+//    private val cocktailsUseCase: CocktailsUSeCase
 ): ViewModel(){
 //
-//    val state = MutableSharedFlow<ListCocktailsReponse>()
+//    val state = MutableSharedFlow<ListCocktailsResponse>()
 //
-//    suspend fun getAllCoctails() {
+//    suspend fun getAllCocktails() {
 //        viewModelScope.launch(Dispatchers.IO) {
-//            val response = coctailsUseCase.getAll()
+//            val response = cocktailsUseCase.getAll()
 //            state.emit(response)
 //        }
 //    }

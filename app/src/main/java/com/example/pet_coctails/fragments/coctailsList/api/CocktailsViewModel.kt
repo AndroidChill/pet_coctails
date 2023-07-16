@@ -21,24 +21,24 @@ import javax.inject.Inject
 class CocktailsViewModel @Inject constructor(
     private val cocktailsUseCase: CocktailsUseCase
 ) : ViewModel() {
-    
+
     private var _state = MutableStateFlow<CocktailsState>(CocktailsState())
     val state = _state.asStateFlow()
-    
+
     init {
         viewModelScope.launch {
             getAllCocktails()
         }
     }
-    
+
     fun handleAction(action: CocktailsState.Action) {
         when (action) {
             is OnClickCocktail -> {
-            
+
             }
         }
     }
-    
+
     suspend fun getAllCocktails() {
 //        viewModelScope.launch {
         val response = cocktailsUseCase.cocktailsList()
@@ -56,11 +56,11 @@ class CocktailsViewModel @Inject constructor(
 data class CocktailsState(
     val events: List<Event> = emptyList()
 ) {
-    
+
     sealed class Event { class LoadAllCocktails(val data: List<Cocktail>) : Event()
     }
-    
+
     sealed class Action { class OnClickCocktail(val id: Int) : Action()
     }
-    
+
 }

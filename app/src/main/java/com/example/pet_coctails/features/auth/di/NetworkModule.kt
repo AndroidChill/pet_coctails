@@ -1,7 +1,6 @@
 package com.example.pet_coctails.features.auth.di
 
 import com.example.pet_coctails.BuildConfig
-import com.example.pet_coctails.features.auth.data.AuthApiService
 import com.example.pet_coctails.features.auth.BaseUrl
 import com.example.pet_coctails.core.scope.FeatureScope
 import com.example.pet_coctails.features.auth.data.CocktailsApiService
@@ -57,14 +56,10 @@ object NetworkModule {
 
     @Provides
     @FeatureScope
-    fun provideAuthApiService(retrofit: Retrofit): AuthApiService = retrofit.create(AuthApiService::class.java)
+    fun provideAuthApiService(retrofit: Retrofit): CocktailsApiService = retrofit.create(CocktailsApiService::class.java)
     @Provides
     @FeatureScope
     fun provideCocktailsApiService(retrofit: Retrofit): CocktailsApiService = retrofit.create(
         CocktailsApiService::class.java)
-
-
-
-
 
 }

@@ -13,7 +13,6 @@ class CocktailsViewHolder (private val binding: ItemCocktailBinding): RecyclerVi
             tvCategory.text = category
             tvCocktailType.text = cocktailType
             tvGlassType.text = glassType
-            tvInfo.text = info
         }
 
         itemView.setOnClickListener {
