@@ -1,8 +1,6 @@
 package com.example.pet_coctails.features.auth.data
 
-import com.example.pet_coctails.features.auth.domain.model.CocktailsListRequest
-import com.example.pet_coctails.features.auth.domain.model.CocktailsListResponse
-import com.example.pet_coctails.fragments.coctailsList.api.CocktailsRepository
+import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsRepository
 import javax.inject.Inject
 
 class CocktailsRepositoryImpl @Inject constructor(
@@ -11,6 +9,10 @@ class CocktailsRepositoryImpl @Inject constructor(
 
     override suspend fun cocktailsList(): ListCocktailsResponse {
         return cocktailsNetworkDataSource.cocktailsList()
+    }
+
+    override suspend fun cocktailInfo(): CocktailResponse {
+        return cocktailsNetworkDataSource.cocktailInfo()
     }
 
 

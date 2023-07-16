@@ -6,7 +6,7 @@ import com.example.pet_coctails.activity.onboard.OnboardViewModel
 import com.example.pet_coctails.activity.main.MainViewModel
 import com.example.pet_coctails.core.annotation.ViewModelKey
 import com.example.pet_coctails.core.factory.ViewModelFactory
-import com.example.pet_coctails.fragments.coctailsList.api.CocktailsViewModel
+import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

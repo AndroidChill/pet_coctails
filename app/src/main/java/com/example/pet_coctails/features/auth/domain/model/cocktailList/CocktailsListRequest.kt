@@ -1,4 +1,4 @@
-package com.example.pet_coctails.features.auth.domain.model
+package com.example.pet_coctails.features.auth.domain.model.cocktailList
 
 
 data class CocktailsListRequest(

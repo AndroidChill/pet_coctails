@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cocktailsListFragment"
-        android:name="com.example.pet_coctails.fragments.coctailsList.CocktailsListFragment"
+        android:name="com.example.pet_coctails.fragments.cocktailsList.CocktailsListFragment"
         android:label="CocktailsListFragment" >
         <action
             android:id="@+id/action_cocktailsListFragment_to_cocktailInfoFragment"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/cocktailInfoFragment"
-        android:name="com.example.pet_coctails.fragments.CocktailInfoFragment"
+        android:name="com.example.pet_coctails.fragments.cocktailInfo.CocktailInfoFragment"
         android:label="CocktailInfoFragment" >
         <action
             android:id="@+id/action_cocktailInfoFragment_to_cocktailsListFragment"

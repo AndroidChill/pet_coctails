@@ -1,4 +1,4 @@
-package com.example.pet_coctails.fragments.coctailsList
+package com.example.pet_coctails.fragments.cocktailsList
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pet_coctails.databinding.ItemCocktailBinding

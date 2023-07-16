@@ -1,33 +1,21 @@
-package com.example.pet_coctails.fragments.coctailsList
+package com.example.pet_coctails.fragments.cocktailsList
 
 import android.os.Bundle
-import android.renderscript.ScriptGroup.Binding
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewbinding.ViewBinding
 import com.example.pet_coctails.R
-import com.example.pet_coctails.activity.main.MainViewModel
 import com.example.pet_coctails.core.abstraction.BaseFragment
-import com.example.pet_coctails.databinding.ActivityMainBinding
 import com.example.pet_coctails.databinding.FragmentCocktailsListBinding
 import com.example.pet_coctails.features.auth.BaseApplication
 import com.example.pet_coctails.features.auth.di.DaggerAuthComponent
-import com.example.pet_coctails.fragments.MainFragment
-import com.example.pet_coctails.fragments.coctailsList.api.CocktailsState
-import com.example.pet_coctails.fragments.coctailsList.api.CocktailsState.Action
-import com.example.pet_coctails.fragments.coctailsList.api.CocktailsState.Event.MoveToCocktailINfo
-import com.example.pet_coctails.fragments.coctailsList.api.CocktailsViewModel
+import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsState
+import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsState.Action
+import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsState.Event.MoveToCocktailInfo
+import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsViewModel
 import kotlinx.coroutines.launch
 
-// TODO Происходит что-то странное в старых функциях
 
 class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, CocktailsViewModel>(){
 
@@ -50,7 +38,6 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
     private lateinit var adapter: CocktailsAdapter
     
     override fun initUI() {
-        // TODO ("дополнительно посмотреть разницук parentFragmentManger childFragmentManager")
 //        childFragmentManager.beginTransaction()
 //            .replace(R.id.container, MainFragment())
 //            .commit()
@@ -64,7 +51,7 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
         }
         
         binding.rvCocktails.layoutManager =
-            LinearLayoutManager(requireContext()) // todo а что не так?(
+            LinearLayoutManager(requireContext())
         
         binding.rvCocktails.adapter = adapter
         
@@ -84,7 +71,7 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
                                 )
                             })
                         }
-                        is MoveToCocktailINfo -> {
+                        is MoveToCocktailInfo -> {
                             findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailInfoFragment, Bundle().apply {
                                 putString("id", event.data.idDrink)
                             })

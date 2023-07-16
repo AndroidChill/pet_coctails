@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.pet_coctails.databinding.FragmentMainBinding
-import com.example.pet_coctails.fragments.coctailsList.CocktailsListFragment
 
 
 class MainFragment : Fragment() {

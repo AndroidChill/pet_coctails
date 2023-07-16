@@ -4,7 +4,7 @@ import com.example.pet_coctails.activity.onboard.OnboardActivity
 import com.example.pet_coctails.activity.main.MainActivity
 import com.example.pet_coctails.core.scope.CoreComponent
 import com.example.pet_coctails.core.scope.FeatureScope
-import com.example.pet_coctails.fragments.coctailsList.CocktailsListFragment
+import com.example.pet_coctails.fragments.cocktailsList.CocktailsListFragment
 import com.example.pet_coctails.fragments.OnboardFirstFragment
 import dagger.Component
 

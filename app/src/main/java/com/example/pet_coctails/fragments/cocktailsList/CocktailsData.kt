@@ -1,4 +1,4 @@
-package com.example.pet_coctails.fragments.coctailsList
+package com.example.pet_coctails.fragments.cocktailsList
 
 data class CocktailsData(
     val imageLink: String,
