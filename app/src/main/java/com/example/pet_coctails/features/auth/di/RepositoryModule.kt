@@ -9,6 +9,6 @@ import dagger.Module
 interface RepositoryModule {
 
     @Binds
-    fun bindAuthRepositoryImpl(repositoryImpl: CocktailsRepositoryImpl): CocktailsRepository
+    fun bindCocktailsRepositoryImpl(repositoryImpl: CocktailsRepositoryImpl): CocktailsRepository
 
 }

@@ -1,11 +1,10 @@
 package com.example.pet_coctails.fragments.coctailsList
 
 data class CocktailsData(
-    val imageLink: Int,
+    val imageLink: String,
     val cocktailName: String,
-    val id: Int,
+    val id: String,
     val category: String,
     val cocktailType: String,
     val glassType: String,
-    val info: String
 )

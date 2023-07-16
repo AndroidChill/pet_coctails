@@ -1,6 +1,6 @@
 package com.example.pet_coctails.features.auth.di
 
-import com.example.pet_coctails.activity.Onboard.OnboardActivity
+import com.example.pet_coctails.activity.onboard.OnboardActivity
 import com.example.pet_coctails.activity.main.MainActivity
 import com.example.pet_coctails.core.scope.CoreComponent
 import com.example.pet_coctails.core.scope.FeatureScope
@@ -13,6 +13,9 @@ import dagger.Component
     dependencies = [CoreComponent::class],
     modules = [
 //        NetworkModule::class,
+        NetworkModule::class,
+        NetworkCocktailsModule::class,
+        DataModule::class,
         RepositoryModule::class,
         AuthViewModelModule::class
     ]

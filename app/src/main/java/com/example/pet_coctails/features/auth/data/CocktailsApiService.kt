@@ -3,24 +3,28 @@ package com.example.pet_coctails.features.auth.data
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface CocktailsApiService {
 
-    @GET("/random.php")
+    @GET("search.php?f=a")
     suspend fun getListCocktails(): ListCocktailsResponse
+    
+    @GET("lookup.php")
+    suspend fun get(@Query("i") id: String)
 }
 
 data class ListCocktailsResponse(
-    val data: List<Cocktail>
+    val drinks: List<Cocktail>
 )
 
 @Serializable
 data class Cocktail(
-    @SerialName("image_link")
-    val imageLink: Int,
-    val cocktailName: String,
-    val id: Int,
-    val category: String,
-    val cocktailType: String,
-    val glassType: String
+//    val strDrinkThumb: Int,
+    val strDrink: String,
+    val idDrink: String,
+    val strCategory: String,
+    val strAlcoholic: String,
+    val strGlass: String
 )

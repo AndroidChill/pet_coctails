@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @FeatureScope
@@ -34,22 +35,37 @@ class CocktailsViewModel @Inject constructor(
     fun handleAction(action: CocktailsState.Action) {
         when (action) {
             is OnClickCocktail -> {
-
+                // val cocktail = coctailUseCase.getInFoCoctailById()
+                // moveToCoctailInfo()
+                /**
+                 *  _state.update { oldState ->
+                 *                 oldState.copy(
+                 *                     events = oldState.events + CocktailsState.Event.MoveToCocktailINfo(
+                 *                         cocktail
+                 *                     )
+                 *                 )
+                 *             }
+                 * */
+                
             }
         }
     }
 
     suspend fun getAllCocktails() {
 //        viewModelScope.launch {
-        val response = cocktailsUseCase.cocktailsList()
-        _state.update { oldState ->
-            oldState.copy(
-                events = oldState.events + CocktailsState.Event.LoadAllCocktails(
-                    response.data
+        try {
+            val response = cocktailsUseCase.cocktailsList()
+            _state.update { oldState ->
+                oldState.copy(
+                    events = oldState.events + CocktailsState.Event.LoadAllCocktails(
+                        response.drinks
+                    )
                 )
-            )
+            }
+        } catch (e: Exception) {
+            val k = 4
         }
-//        }
+        
     }
 }
 
@@ -57,10 +73,13 @@ data class CocktailsState(
     val events: List<Event> = emptyList()
 ) {
 
-    sealed class Event { class LoadAllCocktails(val data: List<Cocktail>) : Event()
+    sealed class Event {
+        class LoadAllCocktails(val data: List<Cocktail>) : Event()
+        
+        class MoveToCocktailINfo(val data: Cocktail) : Event()
     }
 
-    sealed class Action { class OnClickCocktail(val id: Int) : Action()
+    sealed class Action { class OnClickCocktail(val id: String) : Action()
     }
 
 }

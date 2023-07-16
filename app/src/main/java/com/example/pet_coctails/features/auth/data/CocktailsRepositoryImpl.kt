@@ -6,8 +6,7 @@ import com.example.pet_coctails.fragments.coctailsList.api.CocktailsRepository
 import javax.inject.Inject
 
 class CocktailsRepositoryImpl @Inject constructor(
-    private val cocktailsNetworkDataSource: CocktailsNetworkDataSource,
-    private val localDataSource: CocktailsLocalDataSource
+    private val cocktailsNetworkDataSource: CocktailsNetworkDataSource
 ) : CocktailsRepository {
 
     override suspend fun cocktailsList(): ListCocktailsResponse {
