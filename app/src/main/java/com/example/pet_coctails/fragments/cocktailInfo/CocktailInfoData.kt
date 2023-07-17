@@ -1,7 +1,7 @@
 package com.example.pet_coctails.fragments.cocktailInfo
 
 data class CocktailInfoData(
-//    val imageLink: String,
+    val imageLink: String,
     val cocktailName: String,
     val id: String,
     val category: String,

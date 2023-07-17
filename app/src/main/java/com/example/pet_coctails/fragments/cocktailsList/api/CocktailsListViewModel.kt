@@ -4,13 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pet_coctails.core.scope.FeatureScope
 import com.example.pet_coctails.features.auth.data.Cocktail
+import com.example.pet_coctails.features.auth.data.CocktailResponse
+import com.example.pet_coctails.fragments.CocktailsRepository
 import com.example.pet_coctails.fragments.CocktailsUseCase
 import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsState.Action.OnClickCocktail
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @FeatureScope
@@ -28,30 +29,41 @@ class CocktailsViewModel @Inject constructor(
     }
 
     fun handleAction(action: CocktailsState.Action) {
+
         when (action) {
             is OnClickCocktail -> {
-//                 val cocktail = cocktailsUseCase.cocktailInfo()
-                // moveToCocktailInfo()
-              //todo пока не понятно?
-                /**
-                 *  _state.update { oldState ->
-                 *                 oldState.copy(
-                 *                     events = oldState.events + CocktailsState.Event.MoveToCocktailInfo(
-                 *                         cocktail
-                 *                     )
-                 *                 )
-                 *             }
-                 * */
-                
+                viewModelScope.launch {
+                    val cocktail = cocktailsUseCase.cocktailInfo()
+                    _state.update { oldState ->
+                        oldState.copy(
+                            events = oldState.events + CocktailsState.Event.MoveToCocktailInfo(
+                                responseIntoCocktail(cocktailsUseCase.cocktailInfo())
+                            )
+                        )
+                    }
+
+                }
             }
         }
     }
 
+    fun responseIntoCocktail(into: CocktailResponse) : Cocktail{
+
+        val list = into.cocktailFullInfo.slice(0..4)
+
+        return Cocktail(
+            list[0].toString(),
+            list[1].toString(),
+            list[2].toString(),
+            list[3].toString(),
+            list[4].toString(),
+        )
+    }
 
     // For CocktailsListFragment
     suspend fun getAllCocktails() {
-//        viewModelScope.launch {
-        try {
+        viewModelScope.launch {
+
             val response = cocktailsUseCase.cocktailsList()
             _state.update { oldState ->
                 oldState.copy(
@@ -60,10 +72,8 @@ class CocktailsViewModel @Inject constructor(
                     )
                 )
             }
-        } catch (e: Exception) {
-            val k = 4
         }
-        
+
     }
 }
 
@@ -73,7 +83,7 @@ data class CocktailsState(
 
     sealed class Event {
         class LoadAllCocktails(val data: List<Cocktail>) : Event()
-        
+
         class MoveToCocktailInfo(val data: Cocktail) : Event()
     }
 
