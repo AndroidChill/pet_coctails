@@ -1,4 +1,4 @@
-package com.example.pet_coctails.fragments.cocktailsList.api
+package com.example.pet_coctails.fragments
 
 import com.example.pet_coctails.features.auth.data.CocktailResponse
 import com.example.pet_coctails.features.auth.data.ListCocktailsResponse

@@ -5,7 +5,7 @@
     app:startDestination="@id/onboardFirstFragment">
     <fragment
         android:id="@+id/onboardFirstFragment"
-        android:name="com.example.pet_coctails.fragments.OnboardFirstFragment"
+        android:name="com.example.pet_coctails.fragments.overs.OnboardFirstFragment"
         android:label="OnboardFirstFragment" >
         <action
             android:id="@+id/action_onboardFirstFragment_to_onboardSecondFragment"
@@ -13,6 +13,6 @@
     </fragment>
     <fragment
         android:id="@+id/onboardSecondFragment"
-        android:name="com.example.pet_coctails.fragments.OnboardSecondFragment"
+        android:name="com.example.pet_coctails.fragments.overs.OnboardSecondFragment"
         android:label="OnboardSecondFragment" />
 </navigation>

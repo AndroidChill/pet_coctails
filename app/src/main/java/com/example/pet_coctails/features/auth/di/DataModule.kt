@@ -5,8 +5,8 @@ import dagger.Module
 import dagger.Provides
 import com.example.pet_coctails.features.auth.data.CocktailsNetworkDataSource
 import com.example.pet_coctails.features.auth.data.CocktailsApiService
-import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsRepository
-import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsUseCase
+import com.example.pet_coctails.fragments.CocktailsRepository
+import com.example.pet_coctails.fragments.CocktailsUseCase
 
 @Module
 object DataModule {

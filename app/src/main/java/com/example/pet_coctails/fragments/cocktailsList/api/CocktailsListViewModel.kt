@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pet_coctails.core.scope.FeatureScope
 import com.example.pet_coctails.features.auth.data.Cocktail
+import com.example.pet_coctails.fragments.CocktailsUseCase
 import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsState.Action.OnClickCocktail
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -26,12 +27,12 @@ class CocktailsViewModel @Inject constructor(
         }
     }
 
-    suspend fun handleAction(action: CocktailsState.Action) {
+    fun handleAction(action: CocktailsState.Action) {
         when (action) {
             is OnClickCocktail -> {
 //                 val cocktail = cocktailsUseCase.cocktailInfo()
                 // moveToCocktailInfo()
-              //todo ?
+              //todo пока не понятно?
                 /**
                  *  _state.update { oldState ->
                  *                 oldState.copy(

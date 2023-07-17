@@ -35,7 +35,7 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
         authComponent.inject(this)
     }
     
-    private lateinit var adapter: CocktailsAdapter
+    private lateinit var adapter: CocktailsListAdapter
     
     override fun initUI() {
 //        childFragmentManager.beginTransaction()
@@ -46,7 +46,7 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
 //
 //        )
         
-        adapter = CocktailsAdapter {
+        adapter = CocktailsListAdapter {
             viewModel.handleAction(Action.OnClickCocktail(it))
         }
         
@@ -56,12 +56,13 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
         binding.rvCocktails.adapter = adapter
         
         lifecycleScope.launch {
+
             viewModel.state.collect {
                 it.events.forEach { event ->
                     when (event) {
                         is CocktailsState.Event.LoadAllCocktails -> {
                             adapter.addData(event.data.map {
-                                CocktailsData(
+                                CocktailsListData(
                                     imageLink = "",
                                     cocktailName = it.strDrink,
                                     id = it.idDrink,

@@ -6,7 +6,7 @@ import com.example.pet_coctails.core.abstraction.BaseActivity
 import com.example.pet_coctails.databinding.ActivityMainBinding
 import com.example.pet_coctails.features.auth.BaseApplication
 import com.example.pet_coctails.features.auth.di.DaggerAuthComponent
-import com.example.pet_coctails.fragments.MainFragment
+import com.example.pet_coctails.fragments.overs.MainFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
