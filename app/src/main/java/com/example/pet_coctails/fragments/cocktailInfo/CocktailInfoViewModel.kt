@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pet_coctails.features.auth.data.Cocktail
 import com.example.pet_coctails.features.auth.data.CocktailFullInfo
+import com.example.pet_coctails.fragments.CocktailSumm
 import com.example.pet_coctails.fragments.CocktailsUseCase
 import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,18 +22,13 @@ class CocktailInfoViewModel @Inject constructor(
     private var _state = MutableStateFlow<CocktailInfoState>(CocktailInfoState())
     val state = _state.asStateFlow()
 
-    init {
-        viewModelScope.launch{
-            getFullCocktailInfo()
-        }
-    }
-    suspend fun getFullCocktailInfo(){
+    suspend fun getFullCocktailInfo(id: String){
         viewModelScope.launch {
-            val response = cocktailsUseCase.cocktailInfo()
+            val response = cocktailsUseCase.cocktailInfo(id)
             _state.update { oldState ->
                 oldState.copy(
                     events = oldState.events + CocktailInfoState.Event.LoadFullCocktailInfo(
-                        response.cocktailFullInfo
+                        response
                     )
                 )
 
@@ -48,7 +44,7 @@ data class CocktailInfoState(
 ) {
 
     sealed class Event {
-        class LoadFullCocktailInfo(val data: List<CocktailFullInfo>) : Event()
+        class LoadFullCocktailInfo(val data: CocktailSumm) : Event()
 
     }
 

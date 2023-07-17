@@ -74,7 +74,7 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
                         }
                         is MoveToCocktailInfo -> {
                             findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailInfoFragment, Bundle().apply {
-                                putString("id", event.data.idDrink)
+                                putString("id", event.idDrink)
                             })
                         }
                     }
