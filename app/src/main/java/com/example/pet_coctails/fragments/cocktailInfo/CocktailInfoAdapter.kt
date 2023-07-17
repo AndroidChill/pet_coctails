@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pet_coctails.databinding.ItemCocktailInfoBinding
+import com.example.pet_coctails.fragments.CocktailClear
 
 class CocktailInfoAdapter : RecyclerView.Adapter<CocktailInfoViewHolder>() {
 
-    private val data = mutableListOf<CocktailInfoData>()
+    private val data = mutableListOf<CocktailClear>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CocktailInfoViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -15,7 +16,7 @@ class CocktailInfoAdapter : RecyclerView.Adapter<CocktailInfoViewHolder>() {
         return CocktailInfoViewHolder(binding)
     }
 
-    fun addData (dataTemp: List<CocktailInfoData>){
+    fun addData (dataTemp: List<CocktailClear>){
         val prevCount = data.size
         data.clear()
         notifyItemRangeRemoved(0,prevCount)
@@ -27,7 +28,7 @@ class CocktailInfoAdapter : RecyclerView.Adapter<CocktailInfoViewHolder>() {
 
     override fun onBindViewHolder(holder: CocktailInfoViewHolder, position: Int) {
         data[position].apply {
-            holder.itemCocktailInfo(this.ingredient1, this.measureIngredient1) //TODO пока так, но должны быть ингредиенты в зависимости от position
+            holder.itemCocktailInfo(this.ingridient, this.measure ?: "на глаз") //TODO пока так, но должны быть ингредиенты в зависимости от position
         }
 
     }

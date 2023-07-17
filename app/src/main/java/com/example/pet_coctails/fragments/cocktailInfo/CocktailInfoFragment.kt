@@ -42,6 +42,8 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
 
     override fun initUI() {
 
+        adapter = CocktailInfoAdapter()
+        
         binding.rvIngredientsList.layoutManager =
             LinearLayoutManager(requireContext())
 
@@ -54,6 +56,10 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
         arguments?.apply {
             id = getString("id", "")
         }
+        
+        lifecycleScope.launch {
+            viewModel.getFullCocktailInfo(id ?: "")
+        }
 
         lifecycleScope.launch {
 
@@ -63,47 +69,7 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
                     when (event) {
 
                         is CocktailInfoState.Event.LoadFullCocktailInfo -> {
-                            adapter.addData(event.data.map {
-                                CocktailInfoData(
-                                    imageLink = "",
-                                    cocktailName = it.strDrink,
-                                    id = it.idDrink,
-                                    category = it.strCategory,
-                                    cocktailType = it.strAlcoholic,
-                                    glassType = it.strGlass,
-                                    instructions = it.strInstructions,
-                                    ingredient1 = it.strIngredient1,
-                                    ingredient2 = it.strIngredient2,
-                                    ingredient3 = it.strIngredient3,
-                                    ingredient4 = it.strIngredient4,
-                                    ingredient5 = it.strIngredient5,
-                                    ingredient6 = it.strIngredient6,
-                                    ingredient7 = it.strIngredient7,
-                                    ingredient8 = it.strIngredient8,
-                                    ingredient9 = it.strIngredient9,
-                                    ingredient10 = it.strIngredient10,
-                                    ingredient11 = it.strIngredient11,
-                                    ingredient12 = it.strIngredient12,
-                                    ingredient13 = it.strIngredient13,
-                                    ingredient14 = it.strIngredient14,
-                                    ingredient15 = it.strIngredient15,
-                                    measureIngredient1 = it.strMeasure1,
-                                    measureIngredient2 = it.strMeasure2,
-                                    measureIngredient3 = it.strMeasure3,
-                                    measureIngredient4 = it.strMeasure4,
-                                    measureIngredient5 = it.strMeasure5,
-                                    measureIngredient6 = it.strMeasure6,
-                                    measureIngredient7 = it.strMeasure7,
-                                    measureIngredient8 = it.strMeasure8,
-                                    measureIngredient9 = it.strMeasure9,
-                                    measureIngredient10 = it.strMeasure10,
-                                    measureIngredient11 = it.strMeasure11,
-                                    measureIngredient12 = it.strMeasure12,
-                                    measureIngredient13 = it.strMeasure13,
-                                    measureIngredient14 = it.strMeasure14,
-                                    measureIngredient15 = it.strMeasure15
-                                )
-                            })
+                            adapter.addData(event.data.some)
                         }
                     }
                 }

@@ -8,6 +8,18 @@ interface CocktailsRepository {
 
     suspend fun cocktailsList(): ListCocktailsResponse
 
-    suspend fun cocktailInfo(): CocktailResponse
+    suspend fun cocktailInfo(id: String): CocktailSumm
 
 }
+
+data class CocktailSumm(
+    val name: String,
+    val category: String,
+    val glass: String,
+    val some: List<CocktailClear>,
+)
+
+data class CocktailClear(
+    val ingridient: String,
+    val measure: String?
+)

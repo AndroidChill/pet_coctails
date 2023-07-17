@@ -28,7 +28,7 @@ data class Cocktail(
 )
 
 data class CocktailResponse (
-    val cocktailFullInfo: List <CocktailFullInfo>
+    val drinks: List <CocktailFullInfo>
         )
 
 @Serializable
@@ -40,9 +40,9 @@ data class CocktailFullInfo(
     val strAlcoholic: String,
     val strGlass: String,
     val strInstructions: String,
-    val strIngredient1: String,
-    val strIngredient2: String,
-    val strIngredient3: String,
+    val strIngredient1: String?,
+    val strIngredient2: String?,
+    val strIngredient3: String?,
     val strIngredient4: String,
     val strIngredient5: String,
     val strIngredient6: String,
