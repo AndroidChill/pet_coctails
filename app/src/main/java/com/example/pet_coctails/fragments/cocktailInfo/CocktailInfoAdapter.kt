@@ -28,7 +28,7 @@ class CocktailInfoAdapter : RecyclerView.Adapter<CocktailInfoViewHolder>() {
 
     override fun onBindViewHolder(holder: CocktailInfoViewHolder, position: Int) {
         data[position].apply {
-            holder.itemCocktailInfo(this.ingridient, this.measure ?: "на глаз") //TODO пока так, но должны быть ингредиенты в зависимости от position
+            holder.itemCocktailInfo(this.ingredient, this.measure ?: "On your taste")
         }
 
     }

@@ -1,4 +1,4 @@
-package com.example.pet_coctails
+package com.example.pet_coctails.core
 
 data class ApiResponse<T>(
     val data: T?,

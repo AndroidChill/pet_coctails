@@ -63,7 +63,7 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
                         is CocktailsState.Event.LoadAllCocktails -> {
                             adapter.addData(event.data.map {
                                 CocktailsListData(
-                                    imageLink = "",
+                                    imageLink = it.strDrinkThumb,
                                     cocktailName = it.strDrink,
                                     id = it.idDrink,
                                     category = it.strCategory,

@@ -2,11 +2,8 @@ package com.example.pet_coctails.fragments.cocktailInfo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pet_coctails.features.auth.data.Cocktail
-import com.example.pet_coctails.features.auth.data.CocktailFullInfo
-import com.example.pet_coctails.fragments.CocktailSumm
+import com.example.pet_coctails.fragments.CocktailSum
 import com.example.pet_coctails.fragments.CocktailsUseCase
-import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -44,7 +41,7 @@ data class CocktailInfoState(
 ) {
 
     sealed class Event {
-        class LoadFullCocktailInfo(val data: CocktailSumm) : Event()
+        class LoadFullCocktailInfo(val data: CocktailSum) : Event()
 
     }
 

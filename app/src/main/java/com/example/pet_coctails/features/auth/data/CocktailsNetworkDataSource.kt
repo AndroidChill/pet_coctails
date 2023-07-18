@@ -9,6 +9,6 @@ class CocktailsNetworkDataSource @Inject constructor(
 ) {
 
     suspend fun cocktailsList () = cocktailsApiService.getListCocktails()
-    suspend fun cocktailInfo (id: String) = cocktailsApiService.getInfo(id) //todo не нравится ему что в ApiService есть id
+    suspend fun cocktailInfo (id: String) = cocktailsApiService.getInfo(id)
 
 }

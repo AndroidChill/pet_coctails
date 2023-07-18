@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
 import com.example.pet_coctails.R
 import com.example.pet_coctails.core.abstraction.BaseFragment
 import com.example.pet_coctails.databinding.FragmentCocktailInfoBinding
@@ -19,8 +20,6 @@ import kotlinx.coroutines.launch
 
 class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailInfoViewModel>() {
 
-//    private lateinit var binding: FragmentCocktailInfoBinding
-    // todo соединить с ViewModel
 
     override val getViewBinding: (LayoutInflater) -> FragmentCocktailInfoBinding
         get() = FragmentCocktailInfoBinding::inflate
@@ -49,6 +48,8 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
 
         binding.rvIngredientsList.adapter = adapter
 
+
+
         binding.btnBack.setOnClickListener {
             findNavController().navigate(R.id.action_cocktailInfoFragment_to_cocktailsListFragment)
         }
@@ -70,6 +71,14 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
 
                         is CocktailInfoState.Event.LoadFullCocktailInfo -> {
                             adapter.addData(event.data.some)
+                            binding.iv.load(event.data.imageLink)
+                            binding.tvName.text = event.data.name
+                            binding.tvId.text = "Cocktail ID: $id"
+                            binding.tvCategory.text = "Cocktail category: " + event.data.category
+                            binding.tvCocktailType.text = "Cocktail type: " + event.data.cocktailType
+                            binding.tvGlassType.text = "Glass type: " + event.data.glass
+                            binding.tvInstructionText.text = event.data.instruction
+
                         }
                     }
                 }
