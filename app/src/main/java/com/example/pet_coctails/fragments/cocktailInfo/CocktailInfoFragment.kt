@@ -13,6 +13,7 @@ import com.example.pet_coctails.databinding.FragmentCocktailInfoBinding
 import com.example.pet_coctails.features.auth.BaseApplication
 import com.example.pet_coctails.features.auth.data.CocktailFullInfo
 import com.example.pet_coctails.features.auth.di.DaggerAuthComponent
+import com.example.pet_coctails.fragments.cocktailInfo.CocktailInfoState.Event.ShowError
 import com.example.pet_coctails.fragments.cocktailsList.CocktailsListData
 import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsState
 import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsViewModel
@@ -80,6 +81,12 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
                             binding.tvInstructionText.text = event.data.instruction
 
                         }
+                        
+                        
+                        is ShowError -> {
+                            // open dialog with info "чото пошло не так, хотите попробовать еще раз?"
+                        }
+                        
                     }
                 }
             }
