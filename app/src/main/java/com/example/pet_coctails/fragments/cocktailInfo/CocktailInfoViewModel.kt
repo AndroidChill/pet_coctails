@@ -14,7 +14,6 @@ class CocktailInfoViewModel @Inject constructor(
     private val cocktailsUseCase: CocktailsUseCase
 ): ViewModel() {
 
-//todo ТУ ДУ
 
     private var _state = MutableStateFlow<CocktailInfoState>(CocktailInfoState())
     val state = _state.asStateFlow()

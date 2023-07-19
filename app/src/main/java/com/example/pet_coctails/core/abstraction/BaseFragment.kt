@@ -11,8 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import javax.inject.Inject
 
-
-//TODO  базовый фрагмент по аналогии с базовой активити (проговаривалось в конце записи от 14.07 на 52.50)
 abstract class BaseFragment <V: ViewBinding, VM: ViewModel> : Fragment() {
 
     private var _binding: V? = null
@@ -26,7 +24,7 @@ abstract class BaseFragment <V: ViewBinding, VM: ViewModel> : Fragment() {
     protected val viewModel: VM
         get() = _viewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) { //TODO не хочет проглатывать onCreateView
+    override fun onCreate(savedInstanceState: Bundle?) {
         setupDaggerComponent()
         super.onCreate(savedInstanceState)
     }
@@ -55,7 +53,7 @@ abstract class BaseFragment <V: ViewBinding, VM: ViewModel> : Fragment() {
 
     abstract fun setupDaggerComponent()
 
-    override fun onDestroy() { //TODO не хочет проглатывать onDestroyView
+    override fun onDestroy() {
         super.onDestroy()
         
     }
