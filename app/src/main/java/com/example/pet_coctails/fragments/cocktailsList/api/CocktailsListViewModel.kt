@@ -65,7 +65,8 @@ data class CocktailsState(
     val events: List<Event> = emptyList()
 ) {
     
-    sealed class Event { class LoadAllCocktails(val data: List<Cocktail>) : Event()
+    sealed class Event {
+        class LoadAllCocktails(val data: List<Cocktail>) : Event()
         
         class MoveToCocktailInfo(val idDrink: String) : Event()
     }

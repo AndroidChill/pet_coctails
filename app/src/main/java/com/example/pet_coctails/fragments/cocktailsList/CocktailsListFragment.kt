@@ -17,10 +17,9 @@ import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsViewModel
 import kotlinx.coroutines.launch
 
 
-class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, CocktailsViewModel>(){
+class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, CocktailsViewModel>() {
 
-//    private lateinit var binding: FragmentCocktailsListBinding
-    
+
     override val getViewBinding: (LayoutInflater) -> FragmentCocktailsListBinding
         get() = FragmentCocktailsListBinding::inflate
     
@@ -38,14 +37,7 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
     private lateinit var adapter: CocktailsListAdapter
     
     override fun initUI() {
-//        childFragmentManager.beginTransaction()
-//            .replace(R.id.container, MainFragment())
-//            .commit()
 
-//        cocktailsAdapter.addData(
-//
-//        )
-        
         adapter = CocktailsListAdapter {
             viewModel.handleAction(Action.OnClickCocktail(it))
         }
@@ -54,7 +46,7 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
             LinearLayoutManager(requireContext())
         
         binding.rvCocktails.adapter = adapter
-        
+
         lifecycleScope.launch {
 
             viewModel.state.collect {
@@ -82,5 +74,5 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
             }
         }
     }
-    
+
 }

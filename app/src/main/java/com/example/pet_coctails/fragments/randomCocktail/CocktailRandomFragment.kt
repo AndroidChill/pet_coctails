@@ -1,32 +1,26 @@
-package com.example.pet_coctails.fragments.cocktailInfo
+package com.example.pet_coctails.fragments.randomCocktail
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.example.pet_coctails.R
 import com.example.pet_coctails.core.abstraction.BaseFragment
-import com.example.pet_coctails.databinding.FragmentCocktailInfoBinding
+import com.example.pet_coctails.databinding.FragmentCocktailRandomBinding
 import com.example.pet_coctails.features.auth.BaseApplication
-import com.example.pet_coctails.features.auth.data.CocktailFullInfo
 import com.example.pet_coctails.features.auth.di.DaggerAuthComponent
-import com.example.pet_coctails.fragments.cocktailInfo.CocktailInfoState.Event.ShowError
 import com.example.pet_coctails.fragments.cocktailInfo.bottomFragment.BottomFragment
 import kotlinx.coroutines.launch
 
-class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailInfoViewModel>() {
+class CocktailRandomFragment : BaseFragment<FragmentCocktailRandomBinding, CocktailRandomViewModel>() {
 
 
-    override val getViewBinding: (LayoutInflater) -> FragmentCocktailInfoBinding
-        get() = FragmentCocktailInfoBinding::inflate
+    override val getViewBinding: (LayoutInflater) -> FragmentCocktailRandomBinding
+        get() = FragmentCocktailRandomBinding::inflate
 
-    override val getViewModelClass: Class<CocktailInfoViewModel>
-        get() = CocktailInfoViewModel::class.java
+    override val getViewModelClass: Class<CocktailRandomViewModel>
+        get() = CocktailRandomViewModel::class.java
 
     override fun setupDaggerComponent() {
         val authComponent = DaggerAuthComponent.builder()
@@ -36,14 +30,12 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
         authComponent.inject(this)
     }
 
-    private lateinit var adapter: CocktailInfoAdapter
-
-    private var id: String? = ""
+    private lateinit var adapter: CocktailRandomAdapter
 
     override fun initUI() {
 
-        adapter = CocktailInfoAdapter()
-        
+        adapter = CocktailRandomAdapter()
+
         binding.rvIngredientsList.layoutManager =
             LinearLayoutManager(requireContext())
 
@@ -52,15 +44,11 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
 
 
         binding.btnBack.setOnClickListener {
-            findNavController().navigate(R.id.action_cocktailInfoFragment_to_cocktailsListFragment)
+            findNavController().navigate(R.id.action_cocktailRandomFragment_to_cocktailsListFragment)
         }
 
-        arguments?.apply {
-            id = getString("id", "")
-        }
-        
         lifecycleScope.launch {
-            viewModel.getFullCocktailInfo(id ?: "")
+            viewModel.getRandomCocktailInfo()
         }
 
         lifecycleScope.launch {
@@ -70,7 +58,7 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
 
                     when (event) {
 
-                        is CocktailInfoState.Event.LoadFullCocktailInfo -> {
+                        is CocktailRandomState.Event.LoadFullCocktailInfo -> {
                             adapter.addData(event.data.some)
                             binding.iv.load(event.data.imageLink)
                             binding.tvName.text = event.data.name
@@ -82,33 +70,23 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
 
                         }
 
-                        is ShowError -> {
+                        is CocktailRandomState.Event.ShowError -> {
                             binding.iv.setImageResource(R.drawable.ups_retry)
                         }
-                        
+
                     }
                 }
             }
         }
 
-binding.btnIngredients.setOnClickListener {
-    val dialogFragment = BottomFragment()
-    dialogFragment.show(parentFragmentManager, "ingredients")
-}
+        binding.btnIngredients.setOnClickListener {
+            val dialogFragment = BottomFragment()
+            dialogFragment.show(parentFragmentManager, "ingredients")
+        }
 
-        // todo TouchEvent не фурычит
-
-//    override fun  onTouchEvent (event: MotionEvent?): Boolean {
-//        event ?: return false
-//        when (event.action){
-//            MotionEvent.ACTION_UP -> {
-//                val dialogFragment = BottomFragment()
-//                dialogFragment.show(parentFragmentManager, "ingredients")
-//            }
-//        }
-//        return true
-//    }
+        binding.btnRandom.setOnClickListener {
+            findNavController().navigate(R.id.action_cocktailRandomFragment_self)
+        }
 
     }
-
-}
+    }

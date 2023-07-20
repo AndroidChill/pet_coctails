@@ -8,6 +8,7 @@ import com.example.pet_coctails.core.annotation.ViewModelKey
 import com.example.pet_coctails.core.factory.ViewModelFactory
 import com.example.pet_coctails.fragments.cocktailInfo.CocktailInfoViewModel
 import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsViewModel
+import com.example.pet_coctails.fragments.randomCocktail.CocktailRandomViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -41,6 +42,11 @@ abstract class AuthViewModelModule {
     @IntoMap
     @ViewModelKey(CocktailInfoViewModel::class)
     internal abstract fun provideCocktailInfoViewModel(viewModel: CocktailInfoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CocktailInfoViewModel::class)
+    internal abstract fun provideCocktailRandomViewModel(viewModel: CocktailRandomViewModel): ViewModel
     
     
     companion object {

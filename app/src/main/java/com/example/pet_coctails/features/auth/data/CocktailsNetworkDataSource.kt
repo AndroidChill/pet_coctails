@@ -10,5 +10,6 @@ class CocktailsNetworkDataSource @Inject constructor(
 
     suspend fun cocktailsList () = cocktailsApiService.getListCocktails()
     suspend fun cocktailInfo (id: String) = cocktailsApiService.getInfo(id)
+    suspend fun cocktailRandom () = cocktailsApiService.getRandom()
 
 }

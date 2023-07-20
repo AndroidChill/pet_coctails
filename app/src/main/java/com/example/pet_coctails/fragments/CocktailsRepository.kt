@@ -5,6 +5,7 @@ import com.example.pet_coctails.features.auth.data.ListCocktailsResponse
 interface CocktailsRepository {
 
     suspend fun cocktailsList(): ListCocktailsResponse
+    suspend fun cocktailRandom(): CocktailSum
 
     suspend fun cocktailInfo(id: String): CocktailSum
 

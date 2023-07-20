@@ -7,10 +7,10 @@ import com.example.pet_coctails.di.module.ApplicationModule
 import com.example.pet_coctails.features.auth.BaseApplication
 
 /**
- * загрузка изображений с проогрессбаром
- * onTouchEvent in CocktailInfoFragment - распознать скролл вниз и при удачном скролле показывать BottomSheetFragmentDialog
- * сердечко в списке коктелей
- * отдельный экран для рандомного коктеля и свайпом получать новый рандомный коктейль
+ * загрузка изображений с проогрессбаром (готово)
+ * onTouchEvent in CocktailRandomFragment - распознать скролл вниз и при удачном скролле показывать BottomSheetFragmentDialog (todo)
+ * сердечко в списке коктелей (todo)
+ * отдельный экран для рандомного коктеля и свайпом получать новый рандомный коктейль (todo осталось разобраться как делать слушатель свайпа)
  * coroutineexcHandler
  * посмотреть на room
  * */

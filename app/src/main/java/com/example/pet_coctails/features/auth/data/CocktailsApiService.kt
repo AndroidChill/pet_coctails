@@ -11,6 +11,8 @@ interface CocktailsApiService {
 
     @GET("lookup.php")
     suspend fun getInfo(@Query("i") id: String): CocktailResponse
+    @GET("random.php")
+    suspend fun getRandom(): CocktailResponse
 }
 
 data class ListCocktailsResponse(
@@ -28,7 +30,7 @@ data class Cocktail(
 )
 
 data class CocktailResponse (
-    val drinks: List <CocktailFullInfo>
+    val drink: List <CocktailFullInfo>
         )
 
 @Serializable

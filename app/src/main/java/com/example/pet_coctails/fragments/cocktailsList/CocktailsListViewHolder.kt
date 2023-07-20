@@ -15,13 +15,13 @@ class CocktailsListViewHolder (private val binding: ItemCocktailBinding): Recycl
                 .data(imageLink)
                 .target(
                     onStart = { placeholder ->
-                        ivCocktail.setImageDrawable(ivCocktail.context.getDrawable(R.drawable.ic_launcher_foreground))
+                        ivCocktail.setImageDrawable(ivCocktail.context.getDrawable(R.drawable.loading_wait))
                     },
                     onSuccess = { result ->
                         ivCocktail.setImageDrawable(result)
                     },
                     onError = { error ->
-                        // Handle the error drawable.
+                        ivCocktail.setImageDrawable(ivCocktail.context.getDrawable(R.drawable.ups_retry))
                     }
                 )
                 .build()
@@ -38,5 +38,14 @@ class CocktailsListViewHolder (private val binding: ItemCocktailBinding): Recycl
             tvCocktailType.text = "Cocktail type: $cocktailType"
             tvGlassType.text = "Glass type: $glassType"
         }
+
+    }
+
+    fun select () {
+        binding.ivHeart.setImageResource(R.drawable.heart_full)
+    }
+
+    fun unselect () {
+        binding.ivHeart.setImageResource(R.drawable.heart_empty)
     }
 }

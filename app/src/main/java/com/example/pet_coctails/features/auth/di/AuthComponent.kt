@@ -7,6 +7,7 @@ import com.example.pet_coctails.core.scope.FeatureScope
 import com.example.pet_coctails.fragments.cocktailInfo.CocktailInfoFragment
 import com.example.pet_coctails.fragments.cocktailsList.CocktailsListFragment
 import com.example.pet_coctails.fragments.overs.OnboardFirstFragment
+import com.example.pet_coctails.fragments.randomCocktail.CocktailRandomFragment
 import dagger.Component
 
 @FeatureScope
@@ -28,6 +29,8 @@ interface AuthComponent {
     fun inject(fragment: OnboardFirstFragment)
     fun inject(activity: CocktailsListFragment)
     fun inject(activity: CocktailInfoFragment)
+
+    fun inject(activity: CocktailRandomFragment)
 
 
 

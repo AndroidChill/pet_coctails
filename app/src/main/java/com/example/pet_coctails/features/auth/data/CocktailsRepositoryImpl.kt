@@ -13,8 +13,12 @@ class CocktailsRepositoryImpl @Inject constructor(
         return cocktailsNetworkDataSource.cocktailsList()
     }
 
+    override suspend fun cocktailRandom(): CocktailResponse {
+        return cocktailsNetworkDataSource.cocktailRandom()
+    }
+
     override suspend fun cocktailInfo(id: String): CocktailSum {
-        val cocktail = cocktailsNetworkDataSource.cocktailInfo(id).drinks.first()
+        val cocktail = cocktailsNetworkDataSource.cocktailInfo(id).drink.first()
         val data = mutableListOf<CocktailClear>()
         
         if (cocktail.strIngredient1 != null) {

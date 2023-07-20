@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_cocktailsListFragment_to_cocktailInfoFragment"
             app:destination="@id/cocktailInfoFragment" />
+        <action
+            android:id="@+id/action_cocktailsListFragment_to_cocktailRandomFragment"
+            app:destination="@id/cocktailRandomFragment" />
     </fragment>
     <fragment
         android:id="@+id/cocktailInfoFragment"
@@ -20,5 +23,16 @@
         <action
             android:id="@+id/action_cocktailInfoFragment_to_cocktailsListFragment"
             app:destination="@id/cocktailsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cocktailRandomFragment"
+        android:name="com.example.pet_coctails.fragments.randomCocktail.CocktailRandomFragment"
+        android:label="CocktailRandomFragment" >
+        <action
+            android:id="@+id/action_cocktailRandomFragment_to_cocktailsListFragment"
+            app:destination="@id/cocktailsListFragment" />
+        <action
+            android:id="@+id/action_cocktailRandomFragment_self"
+            app:destination="@id/cocktailRandomFragment" />
     </fragment>
 </navigation>
