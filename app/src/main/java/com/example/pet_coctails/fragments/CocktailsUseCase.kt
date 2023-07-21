@@ -10,5 +10,5 @@ class CocktailsUseCase @Inject constructor(private val repository: CocktailsRepo
     suspend fun cocktailsList(): ListCocktailsResponse = repository.cocktailsList()
     suspend fun cocktailInfo(id: String): CocktailSum = repository.cocktailInfo(id)
 
-    suspend fun cocktailRandom(): CocktailSum = repository.cocktailRandom()
+    suspend fun cocktailRandom(): CocktailSum? = repository.cocktailRandom()
 }

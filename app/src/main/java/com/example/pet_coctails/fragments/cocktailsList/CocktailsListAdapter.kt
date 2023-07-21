@@ -6,18 +6,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pet_coctails.databinding.ItemCocktailBinding
 
 class CocktailsListAdapter(
-    private val onClick: (String) -> Unit
+    private val onClick: (String) -> Unit,
+    private val onClickFavourite: (String) -> Unit
 ) : RecyclerView.Adapter<CocktailsListViewHolder>() {
 
     private val data = mutableListOf<CocktailsListData>()
-
-    private var select: CocktailsListViewHolder? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CocktailsListViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding: ItemCocktailBinding =
             ItemCocktailBinding.inflate(layoutInflater, parent, false)
-        return CocktailsListViewHolder(binding)
+        return CocktailsListViewHolder(binding, onClickFavourite)
     }
 
     fun addData(dataTemp: List<CocktailsListData>) {
@@ -44,12 +43,6 @@ class CocktailsListAdapter(
 
         holder.itemView.setOnClickListener {
             onClick(data[position].id)
-        }
-
-        holder.itemView.setOnClickListener { //todo сломался переход на инфо фрагмент
-            select?.unselect()
-            select = holder
-            select?.select()
         }
 
     }
