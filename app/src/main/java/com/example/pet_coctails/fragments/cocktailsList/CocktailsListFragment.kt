@@ -38,14 +38,19 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
     
     override fun initUI() {
 
-        adapter = CocktailsListAdapter {
-            viewModel.handleAction(Action.OnClickCocktail(it))
-        }
+        adapter = CocktailsListAdapter(
+            onClick = { viewModel.handleAction(Action.OnClickCocktail(it)) },
+            onClickFavourite = {  }
+        )
         
         binding.rvCocktails.layoutManager =
             LinearLayoutManager(requireContext())
         
         binding.rvCocktails.adapter = adapter
+        
+        binding.btnRandom.setOnClickListener {
+            findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailRandomFragment)
+        }
 
         lifecycleScope.launch {
 

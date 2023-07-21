@@ -9,6 +9,7 @@ import com.example.pet_coctails.features.auth.data.CocktailResponse
 import com.example.pet_coctails.fragments.CocktailsRepository
 import com.example.pet_coctails.fragments.CocktailsUseCase
 import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsState.Action.OnClickCocktail
+import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsState.Action.OnClickFavourite
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -41,6 +42,10 @@ class CocktailsViewModel @Inject constructor(
                     )
                 }
             }
+            
+            is OnClickFavourite -> {
+            
+            }
         }
     }
     
@@ -71,7 +76,10 @@ data class CocktailsState(
         class MoveToCocktailInfo(val idDrink: String) : Event()
     }
     
-    sealed class Action { class OnClickCocktail(val id: String) : Action()
+    sealed class Action {
+        class OnClickCocktail(val id: String) : Action()
+        
+        class OnClickFavourite(val id: String) : Action()
     }
     
 }

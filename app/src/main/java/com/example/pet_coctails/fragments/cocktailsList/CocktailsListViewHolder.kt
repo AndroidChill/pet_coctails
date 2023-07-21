@@ -7,28 +7,32 @@ import coil.request.ImageRequest
 import com.example.pet_coctails.R
 import com.example.pet_coctails.databinding.ItemCocktailBinding
 
-class CocktailsListViewHolder (private val binding: ItemCocktailBinding): RecyclerView.ViewHolder(binding.root) {
-
-    fun itemCocktail (imageLink: String, cocktailName: String, id: String, category: String, cocktailType: String, glassType: String){
-        with(binding){
-            val request = ImageRequest.Builder(ivCocktail.context)
-                .data(imageLink)
-                .target(
-                    onStart = { placeholder ->
-                        ivCocktail.setImageDrawable(ivCocktail.context.getDrawable(R.drawable.loading_wait))
-                    },
-                    onSuccess = { result ->
-                        ivCocktail.setImageDrawable(result)
-                    },
-                    onError = { error ->
-                        ivCocktail.setImageDrawable(ivCocktail.context.getDrawable(R.drawable.ups_retry))
-                    }
-                )
-                .build()
+class CocktailsListViewHolder(
+    private val binding: ItemCocktailBinding,
+    private val onClickFavourite: (String) -> Unit
+) : RecyclerView.ViewHolder(binding.root) {
+    
+    private var isSelect = false
+    
+    fun itemCocktail(
+        imageLink: String,
+        cocktailName: String,
+        id: String,
+        category: String,
+        cocktailType: String,
+        glassType: String
+    ) {
+        with(binding) {
+            val request = ImageRequest.Builder(ivCocktail.context).data(imageLink)
+                .target(onStart = { placeholder ->
+                    ivCocktail.setImageDrawable(ivCocktail.context.getDrawable(R.drawable.loading_wait))
+                }, onSuccess = { result ->
+                    ivCocktail.setImageDrawable(result)
+                }, onError = { error ->
+                    ivCocktail.setImageDrawable(ivCocktail.context.getDrawable(R.drawable.ups_retry))
+                }).build()
             
-            val imageLoader = ImageLoader.Builder(ivCocktail.context)
-                .crossfade(true)
-                .build()
+            val imageLoader = ImageLoader.Builder(ivCocktail.context).crossfade(true).build()
             
             imageLoader.enqueue(request)
             
@@ -37,15 +41,21 @@ class CocktailsListViewHolder (private val binding: ItemCocktailBinding): Recycl
             tvCategory.text = "Cocktail category: $category"
             tvCocktailType.text = "Cocktail type: $cocktailType"
             tvGlassType.text = "Glass type: $glassType"
+            
+            ivHeart.setOnClickListener {
+                onClickFavourite(id)
+                select()
+            }
         }
-
+        
     }
-
-    fun select () {
-        binding.ivHeart.setImageResource(R.drawable.heart_full)
-    }
-
-    fun unselect () {
-        binding.ivHeart.setImageResource(R.drawable.heart_empty)
+    
+    private fun select() {
+        if (isSelect) {
+            binding.ivHeart.setImageResource(R.drawable.heart_empty)
+        } else {
+            binding.ivHeart.setImageResource(R.drawable.heart_full)
+        }
+        isSelect = !isSelect
     }
 }

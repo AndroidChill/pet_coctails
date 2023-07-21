@@ -45,7 +45,7 @@ abstract class AuthViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(CocktailInfoViewModel::class)
+    @ViewModelKey(CocktailRandomViewModel::class)
     internal abstract fun provideCocktailRandomViewModel(viewModel: CocktailRandomViewModel): ViewModel
     
     
