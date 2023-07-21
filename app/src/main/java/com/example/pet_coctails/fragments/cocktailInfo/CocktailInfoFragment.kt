@@ -1,10 +1,6 @@
 package com.example.pet_coctails.fragments.cocktailInfo
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +9,6 @@ import com.example.pet_coctails.R
 import com.example.pet_coctails.core.abstraction.BaseFragment
 import com.example.pet_coctails.databinding.FragmentCocktailInfoBinding
 import com.example.pet_coctails.features.auth.BaseApplication
-import com.example.pet_coctails.features.auth.data.CocktailFullInfo
 import com.example.pet_coctails.features.auth.di.DaggerAuthComponent
 import com.example.pet_coctails.fragments.cocktailInfo.CocktailInfoState.Event.ShowError
 import com.example.pet_coctails.fragments.cocktailInfo.bottomFragment.BottomFragment

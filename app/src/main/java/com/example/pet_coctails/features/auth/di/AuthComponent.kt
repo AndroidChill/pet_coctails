@@ -29,7 +29,6 @@ interface AuthComponent {
     fun inject(fragment: OnboardFirstFragment)
     fun inject(activity: CocktailsListFragment)
     fun inject(activity: CocktailInfoFragment)
-
     fun inject(activity: CocktailRandomFragment)
 
 

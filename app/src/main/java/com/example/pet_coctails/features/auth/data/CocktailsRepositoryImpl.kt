@@ -13,7 +13,7 @@ class CocktailsRepositoryImpl @Inject constructor(
         return cocktailsNetworkDataSource.cocktailsList()
     }
 
-    override suspend fun cocktailRandom(): CocktailResponse {
+    override suspend fun cocktailRandom(): CocktailResponse { //todo ошибся или это из-за поломки даггера?
         return cocktailsNetworkDataSource.cocktailRandom()
     }
 
