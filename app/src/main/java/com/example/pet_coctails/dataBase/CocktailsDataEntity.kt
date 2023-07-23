@@ -5,9 +5,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity (tableName = "cocktails",
-    indices = [Index("id")])
+@Entity (tableName = "cocktails")
 data class CocktailsDataEntity(
-    @PrimaryKey (autoGenerate = true) val id: Long,
-    @ColumnInfo (name = "id_cocktail") val idCocktail: String
+    @PrimaryKey @ColumnInfo (name = "id_cocktail") val idCocktail: String
 )

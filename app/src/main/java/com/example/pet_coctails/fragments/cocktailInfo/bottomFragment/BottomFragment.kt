@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pet_coctails.R
 import com.example.pet_coctails.databinding.FragmentBottomSheetBinding
 import com.example.pet_coctails.fragments.cocktailInfo.CocktailInfoAdapter
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomFragment: BottomSheetDialogFragment() {
+class BottomFragment(): BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentBottomSheetBinding
 
@@ -22,7 +23,7 @@ class BottomFragment: BottomSheetDialogFragment() {
         binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
         // фон для диалога
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
-
+        
         return binding.root
     }
 
@@ -32,12 +33,10 @@ class BottomFragment: BottomSheetDialogFragment() {
 
         val adapter = CocktailInfoAdapter()
 
-            binding.rvIngredientsList.layoutManager =
-                LinearLayoutManager(requireContext())
-
-            binding.rvIngredientsList.adapter = adapter
-
-
+//            binding.rvIngredientsList.layoutManager =
+//                LinearLayoutManager(requireContext())
+//
+//            binding.rvIngredientsList.adapter = adapter
 
     }
 

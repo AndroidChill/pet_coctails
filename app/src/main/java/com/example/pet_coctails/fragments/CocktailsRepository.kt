@@ -1,9 +1,13 @@
 package com.example.pet_coctails.fragments
 
+import com.example.pet_coctails.dataBase.CocktailsDataEntity
 import com.example.pet_coctails.features.auth.data.ListCocktailsResponse
 
 interface CocktailsRepository {
-
+    
+    
+//    suspend fun insertNewCocktailData(entity: CocktailsDataEntity): Long
+    
     suspend fun cocktailsList(): ListCocktailsResponse
     suspend fun cocktailRandom(): CocktailSum?
 

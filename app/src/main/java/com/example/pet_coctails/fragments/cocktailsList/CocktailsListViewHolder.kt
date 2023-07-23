@@ -9,7 +9,7 @@ import com.example.pet_coctails.databinding.ItemCocktailBinding
 
 class CocktailsListViewHolder(
     private val binding: ItemCocktailBinding,
-    private val onClickFavourite: (String) -> Unit
+    private val onClickFavourite: (String, Boolean) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     
     private var isSelect = false
@@ -20,7 +20,8 @@ class CocktailsListViewHolder(
         id: String,
         category: String,
         cocktailType: String,
-        glassType: String
+        glassType: String,
+        isHeart: Boolean
     ) {
         with(binding) {
             val request = ImageRequest.Builder(ivCocktail.context).data(imageLink)
@@ -42,8 +43,11 @@ class CocktailsListViewHolder(
             tvCocktailType.text = "Cocktail type: $cocktailType"
             tvGlassType.text = "Glass type: $glassType"
             
+            isSelect = !isHeart
+            select()
+            
             ivHeart.setOnClickListener {
-                onClickFavourite(id)
+                onClickFavourite(id, isSelect)
                 select()
             }
         }

@@ -1,6 +1,10 @@
 package com.example.pet_coctails.fragments.cocktailInfo
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,10 +16,13 @@ import com.example.pet_coctails.features.auth.BaseApplication
 import com.example.pet_coctails.features.auth.di.DaggerAuthComponent
 import com.example.pet_coctails.fragments.cocktailInfo.CocktailInfoState.Event.ShowError
 import com.example.pet_coctails.fragments.cocktailInfo.bottomFragment.BottomFragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
 import kotlinx.coroutines.launch
 
 class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailInfoViewModel>() {
 
+    var currentFloatY = 0f
 
     override val getViewBinding: (LayoutInflater) -> FragmentCocktailInfoBinding
         get() = FragmentCocktailInfoBinding::inflate
@@ -35,7 +42,24 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
 
     private var id: String? = ""
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun initUI() {
+        
+        binding.content.setOnTouchListener { view, motionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    currentFloatY = motionEvent.y
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    if (motionEvent.y < currentFloatY) {
+                        Log.i("scroll_test", "down")
+                    }
+                }
+                else -> {}
+            }
+            return@setOnTouchListener true
+        }
+        
 
         adapter = CocktailInfoAdapter()
         
@@ -87,8 +111,12 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
         }
 
 binding.btnIngredients.setOnClickListener {
-    val dialogFragment = BottomFragment()
-    dialogFragment.show(parentFragmentManager, "ingredients")
+    
+    val bottomSheetDialogFragment = BottomFragment()
+    bottomSheetDialogFragment.show(childFragmentManager, "bottomSheetDialogFragment")
+    
+//    val dialogFragment = BottomFragment()
+//    dialogFragment.show(parentFragmentManager, "ingredients")
 }
 
         // todo TouchEvent не фурычит
