@@ -13,11 +13,11 @@ class CocktailsDataRepository (private val cocktailsDao: CocktailsDao) {
         }
     }
 
-    suspend fun getAllCocktailData(): List<CocktailsTuple> {
-        return withContext(Dispatchers.IO) {
-            return@withContext cocktailsDao.getCocktailData()
-        }
-    }
+//    suspend fun getAllCocktailData(): List<CocktailsTuple> {
+//        return withContext(Dispatchers.IO) {
+//            return@withContext cocktailsDao.getCocktailData()
+//        }
+//    }
 
     suspend fun removeCocktailDataById(id: Long) {
         withContext(Dispatchers.IO) {

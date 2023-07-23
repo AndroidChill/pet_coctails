@@ -1,6 +1,8 @@
 package com.example.pet_coctails
 
 import com.example.pet_coctails.core.scope.CoreComponent
+import com.example.pet_coctails.dataBase.DatabaseClient
+import com.example.pet_coctails.dataBase.DatabaseClient.Companion
 import com.example.pet_coctails.di.component.ApplicationComponent
 import com.example.pet_coctails.di.component.DaggerApplicationComponent
 import com.example.pet_coctails.di.module.ApplicationModule
@@ -18,6 +20,7 @@ import com.example.pet_coctails.features.auth.BaseApplication
 class RomApplication : BaseApplication() {
 
 //    private lateinit var applicationComponent: ApplicationComponent
+    lateinit var databaseClient: DatabaseClient
     
     val appComponent: ApplicationComponent by lazy {
         DaggerApplicationComponent.builder().applicationModule(ApplicationModule(this)).build()
@@ -29,34 +32,11 @@ class RomApplication : BaseApplication() {
         super.onCreate()
         injectDependencies()
 
-//        registerActivityLifecycleCallbacks(object: ActivityLifecycleCallbacks {
-//
-//            override fun onActivityPreStarted(activity: Activity) {
-//                super.onActivityPreStarted(activity)
-//                if (activity is MainActivity && isWorkSleptActivity()){
-//                    val intent = Intent (activity, OnboardActivity::class.java)
-//                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-//                    startActivity(intent)
-//                }
-//            }
-//
-//            override fun onActivityCreated(p0: Activity, p1: Bundle?) {}
-//
-//            override fun onActivityStarted(p0: Activity) {}
-//
-//            override fun onActivityResumed(p0: Activity) {}
-//
-//            override fun onActivityPaused(p0: Activity) {}
-//
-//            override fun onActivityStopped(p0: Activity) {
-//                timeClosed = System.currentTimeMillis()
-//            }
-//
-//            override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {}
-//
-//            override fun onActivityDestroyed(p0: Activity) {}
-//        })
+        databaseClient = DatabaseClient.getInstance(applicationContext)
+
     }
+    
+    fun getDataBase() = databaseClient.appDatabase
     
     private fun isWorkSleptActivity(): Boolean {
         return timeClosed == 0L || (System.currentTimeMillis() - timeClosed > 30_000)

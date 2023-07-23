@@ -7,4 +7,5 @@ data class CocktailsListData(
     val category: String,
     val cocktailType: String,
     val glassType: String,
+    var isHeart: Boolean
 )

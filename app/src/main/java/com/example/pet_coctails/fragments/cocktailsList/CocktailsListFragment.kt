@@ -1,6 +1,7 @@
 package com.example.pet_coctails.fragments.cocktailsList
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
@@ -8,7 +9,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pet_coctails.R
+import com.example.pet_coctails.RomApplication
 import com.example.pet_coctails.core.abstraction.BaseFragment
+import com.example.pet_coctails.dataBase.CocktailsDataEntity
 import com.example.pet_coctails.databinding.FragmentCocktailsListBinding
 import com.example.pet_coctails.features.auth.BaseApplication
 import com.example.pet_coctails.features.auth.di.DaggerAuthComponent
@@ -16,12 +19,12 @@ import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsState
 import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsState.Action
 import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsState.Event.MoveToCocktailInfo
 import com.example.pet_coctails.fragments.cocktailsList.api.CocktailsViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
 class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, CocktailsViewModel>() {
-
-
+    
     override val getViewBinding: (LayoutInflater) -> FragmentCocktailsListBinding
         get() = FragmentCocktailsListBinding::inflate
     
@@ -39,46 +42,86 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
     private lateinit var adapter: CocktailsListAdapter
     
     override fun initUI() {
-
-        adapter = CocktailsListAdapter(
-            onClick = { viewModel.handleAction(Action.OnClickCocktail(it)) },
-            onClickFavourite = {
-                viewModel.handleAction(Action.OnClickFavourite(it))
-            }
-        )
         
-        binding.rvCocktails.layoutManager =
-            LinearLayoutManager(requireContext())
+        lifecycleScope.launch(Dispatchers.IO) {
+            val idCocktails = ((requireActivity()).application as? RomApplication)?.getDataBase()
+                ?.getStatisticDao()?.getCocktailData()
+            val test = idCocktails
+        }
+        
+        val coroutineExceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+            Log.i("database", "error already exist")
+        }
+        
+        adapter =
+            CocktailsListAdapter(onClick = { viewModel.handleAction(Action.OnClickCocktail(it)) },
+                onClickFavourite = { id, isSelect ->
+                    lifecycleScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+                        
+                        if (isSelect) {
+                            // remove
+                        } else {
+                            val idCocktails =
+                                ((requireActivity()).application as? RomApplication)?.getDataBase()
+                                    ?.getStatisticDao()?.insertNewCocktailData(
+                                    CocktailsDataEntity(id)
+                                )
+                            val test = idCocktails
+                        }
+                        
+                    }
+
+//                viewModel.handleAction(Action.OnClickFavourite(it))
+                })
+        
+        binding.rvCocktails.layoutManager = LinearLayoutManager(requireContext())
         
         binding.rvCocktails.adapter = adapter
         
         binding.btnRandom.setOnClickListener {
             findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailRandomFragment)
         }
-
+        
         lifecycleScope.launch {
-
+            
             viewModel.state.collect {
                 it.events.forEach { event ->
                     when (event) {
                         is CocktailsState.Event.LoadAllCocktails -> {
-                            adapter.addData(event.data.map {
+                            val data = event.data.map {
                                 CocktailsListData(
                                     imageLink = it.strDrinkThumb,
                                     cocktailName = it.strDrink,
                                     id = it.idDrink,
                                     category = it.strCategory,
                                     cocktailType = it.strAlcoholic,
-                                    glassType = it.strGlass
+                                    glassType = it.strGlass,
+                                    isHeart = false
                                 )
-                            })
+                            }
+                            
+                            lifecycleScope.launch(Dispatchers.IO) {
+                                val idCocktails =
+                                    ((requireActivity()).application as? RomApplication)?.getDataBase()
+                                        ?.getStatisticDao()?.getCocktailData()
+                                        ?.map { it.idCocktail } ?: emptyList()
+                                data.forEach { item ->
+                                    item.isHeart = idCocktails.contains(item.id)
+                                }
+                            }
+                            
+                            adapter.addData(data)
                         }
+                        
                         is MoveToCocktailInfo -> {
-                            findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailInfoFragment, Bundle().apply {
-                                putString("id", event.idDrink)
-                            })
+                            findNavController().navigate(
+                                R.id.action_cocktailsListFragment_to_cocktailInfoFragment,
+                                Bundle().apply {
+                                    putString("id", event.idDrink)
+                                })
                         }
-                        is CocktailsState.Event.ShowError ->{
+                        
+                        is CocktailsState.Event.ShowError -> {
                             Toast.makeText(context, "Ups, internet is missing", LENGTH_LONG).show()
                         }
                     }
@@ -86,5 +129,5 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
             }
         }
     }
-
+    
 }

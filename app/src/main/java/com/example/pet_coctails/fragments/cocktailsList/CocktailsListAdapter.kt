@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pet_coctails.databinding.ItemCocktailBinding
+import kotlinx.serialization.descriptors.PrimitiveKind.BOOLEAN
 
 class CocktailsListAdapter(
     private val onClick: (String) -> Unit,
-    private val onClickFavourite: (String) -> Unit
+    private val onClickFavourite: (String, Boolean) -> Unit
 ) : RecyclerView.Adapter<CocktailsListViewHolder>() {
 
     private val data = mutableListOf<CocktailsListData>()
@@ -37,7 +38,8 @@ class CocktailsListAdapter(
                 this.id,
                 this.category,
                 this.cocktailType,
-                this.glassType
+                this.glassType,
+                this.isHeart
             )
         }
 

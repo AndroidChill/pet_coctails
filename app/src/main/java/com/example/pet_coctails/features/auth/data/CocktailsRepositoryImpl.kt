@@ -1,14 +1,22 @@
 package com.example.pet_coctails.features.auth.data
 
+import com.example.pet_coctails.dataBase.CocktailsDataEntity
 import com.example.pet_coctails.fragments.CocktailClear
 import com.example.pet_coctails.fragments.CocktailSum
 import com.example.pet_coctails.fragments.CocktailsRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CocktailsRepositoryImpl @Inject constructor(
-    private val cocktailsNetworkDataSource: CocktailsNetworkDataSource
+    private val cocktailsNetworkDataSource: CocktailsNetworkDataSource,
+//    private val cocktailsLocalDataSource: CocktailsLocalDataSource
 ) : CocktailsRepository {
-
+    
+//    override suspend fun insertNewCocktailData(entity: CocktailsDataEntity): Long {
+//        return cocktailsLocalDataSource.insertNewCocktailData(entity)
+//    }
+    
     override suspend fun cocktailsList(): ListCocktailsResponse {
         return cocktailsNetworkDataSource.cocktailsList()
     }

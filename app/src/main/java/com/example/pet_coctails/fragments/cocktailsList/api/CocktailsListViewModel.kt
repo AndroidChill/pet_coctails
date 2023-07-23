@@ -3,6 +3,7 @@ package com.example.pet_coctails.fragments.cocktailsList.api
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pet_coctails.core.scope.FeatureScope
+import com.example.pet_coctails.dataBase.CocktailsDataEntity
 import com.example.pet_coctails.dataBase.CocktailsDataRepository
 import com.example.pet_coctails.dataBase.CocktailsIdData
 import com.example.pet_coctails.features.auth.data.Cocktail
@@ -45,7 +46,7 @@ class CocktailsViewModel @Inject constructor(
 
     }
     
-    suspend fun handleAction(action: CocktailsState.Action) {
+    fun handleAction(action: CocktailsState.Action) {
         
         when (action) {
             is OnClickCocktail -> {
@@ -60,7 +61,8 @@ class CocktailsViewModel @Inject constructor(
             
             is OnClickFavourite -> {
                 val newCocktail = CocktailsIdData (idCocktail = action.id)
-                CocktailsDataRepository().insertNewCocktailData(newCocktail.toCocktailsDataEntity()) //todo
+//                cocktailsUseCase.insertNewCocktailData(CocktailsDataEntity(idCocktail = action.id))
+//                CocktailsDataRepository().insertNewCocktailData(newCocktail.toCocktailsDataEntity()) //todo
             }
         }
     }
