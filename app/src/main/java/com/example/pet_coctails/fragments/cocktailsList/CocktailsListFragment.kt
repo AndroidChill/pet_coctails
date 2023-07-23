@@ -2,6 +2,8 @@ package com.example.pet_coctails.fragments.cocktailsList
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,7 +42,9 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
 
         adapter = CocktailsListAdapter(
             onClick = { viewModel.handleAction(Action.OnClickCocktail(it)) },
-            onClickFavourite = {  }
+            onClickFavourite = {
+                viewModel.handleAction(Action.OnClickFavourite(it))
+            }
         )
         
         binding.rvCocktails.layoutManager =
@@ -73,6 +77,9 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
                             findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailInfoFragment, Bundle().apply {
                                 putString("id", event.idDrink)
                             })
+                        }
+                        is CocktailsState.Event.ShowError ->{
+                            Toast.makeText(context, "Ups, internet is missing", LENGTH_LONG).show()
                         }
                     }
                 }

@@ -31,7 +31,7 @@ class CocktailRandomViewModel @Inject constructor(
     }
     
     suspend fun getRandomCocktailInfo() {
-        viewModelScope.launch(coroutineExceptionHandler + CoroutineName("getFullCocktail")) {
+        viewModelScope.launch(coroutineExceptionHandler + CoroutineName("getRandomCocktail")) {
             val response = cocktailsUseCase.cocktailRandom()
             val newState = if (response == null) {
                 ShowError
