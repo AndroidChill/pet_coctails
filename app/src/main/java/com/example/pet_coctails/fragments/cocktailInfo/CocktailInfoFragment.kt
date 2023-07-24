@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,8 @@ import com.example.pet_coctails.fragments.cocktailInfo.CocktailInfoState.Event.S
 import com.example.pet_coctails.fragments.cocktailInfo.bottomFragment.BottomFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.launch
 
 class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailInfoViewModel>() {
@@ -44,7 +47,7 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initUI() {
-        
+
         binding.content.setOnTouchListener { view, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -52,6 +55,7 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
                 }
                 MotionEvent.ACTION_MOVE -> {
                     if (motionEvent.y < currentFloatY) {
+                        showBottomSheetDialog()
                         Log.i("scroll_test", "down")
                     }
                 }
@@ -59,10 +63,10 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
             }
             return@setOnTouchListener true
         }
-        
+
 
         adapter = CocktailInfoAdapter()
-        
+
         binding.rvIngredientsList.layoutManager =
             LinearLayoutManager(requireContext())
 
@@ -77,7 +81,7 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
         arguments?.apply {
             id = getString("id", "")
         }
-        
+
         lifecycleScope.launch {
             viewModel.getFullCocktailInfo(id ?: "")
         }
@@ -95,7 +99,8 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
                             binding.tvName.text = event.data.name
                             binding.tvId.text = "Cocktail ID: $id"
                             binding.tvCategory.text = "Cocktail category: " + event.data.category
-                            binding.tvCocktailType.text = "Cocktail type: " + event.data.cocktailType
+                            binding.tvCocktailType.text =
+                                "Cocktail type: " + event.data.cocktailType
                             binding.tvGlassType.text = "Glass type: " + event.data.glass
                             binding.tvInstructionText.text = event.data.instruction
 
@@ -104,34 +109,20 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
                         is ShowError -> {
                             binding.iv.setImageResource(R.drawable.ups_retry)
                         }
-                        
+
                     }
                 }
             }
         }
 
-binding.btnIngredients.setOnClickListener {
-    
-    val bottomSheetDialogFragment = BottomFragment()
-    bottomSheetDialogFragment.show(childFragmentManager, "bottomSheetDialogFragment")
-    
-//    val dialogFragment = BottomFragment()
-//    dialogFragment.show(parentFragmentManager, "ingredients")
-}
-
-        // todo TouchEvent не фурычит
-
-//    override fun  onTouchEvent (event: MotionEvent?): Boolean {
-//        event ?: return false
-//        when (event.action){
-//            MotionEvent.ACTION_UP -> {
-//                val dialogFragment = BottomFragment()
-//                dialogFragment.show(parentFragmentManager, "ingredients")
-//            }
-//        }
-//        return true
-//    }
-
     }
 
+    private fun showBottomSheetDialog() {
+
+        val dialog = BottomSheetDialog(requireContext())
+
+        dialog.setContentView(R.layout.bottom_sheet_dialog)
+
+        dialog.show()
+    }
 }

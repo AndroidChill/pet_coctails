@@ -120,17 +120,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_instruction" />
 
-
-        <Button
-            android:id="@+id/btn_ingredients"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Show ingredients"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_instruction_text" />
-
         <Button
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
@@ -138,31 +127,9 @@
             android:text="Back to cocktails list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_ingredients" />
-
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_back">
-
-            <LinearLayout
-                android:id="@+id/bottom_sheet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-                app:behavior_peekHeight="100dp"
-                app:behavior_hideable="true">
-
-                <!-- Add content to the Bottom Sheet -->
-
-            </LinearLayout>
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+            app:layout_constraintTop_toBottomOf="@id/tv_instruction_text" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
