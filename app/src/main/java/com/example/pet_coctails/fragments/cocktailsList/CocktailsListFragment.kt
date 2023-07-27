@@ -26,23 +26,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, CocktailsViewModel>() {
-
+    
     override val getViewBinding: (LayoutInflater) -> FragmentCocktailsListBinding
         get() = FragmentCocktailsListBinding::inflate
-
+    
     override val getViewModelClass: Class<CocktailsViewModel>
         get() = CocktailsViewModel::class.java
-
+    
     override fun setupDaggerComponent() {
         val authComponent = DaggerAuthComponent.builder()
             .coreComponent((requireActivity().application as BaseApplication).getCoreComponent())
             .build()
-
+        
         authComponent.inject(this)
     }
-
+    
     private lateinit var adapter: CocktailsListAdapter
-
+    
     override fun initUI() {
 
 //        lifecycleScope.launch(Dispatchers.IO) {
@@ -50,46 +50,45 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
 //                ?.getStatisticDao()?.getCocktailData()
 //            val test = idCocktails
 //        }
-
+        
         val coroutineExceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
             Log.i("database", "error already exist")
         }
-
+        
         adapter =
             CocktailsListAdapter(onClick = { viewModel.handleAction(Action.OnClickCocktail(it)) },
                 onClickFavourite = { id, isSelect ->
                     lifecycleScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-
+                        
                         if (isSelect) {
-//                            val idCocktails =
-//                                ((requireActivity()).application as? RomApplication)?.getDataBase()
-//                                    ?.getStatisticDao()?.deleteCocktailDataById(
-//                                        CocktailsDataEntity(id)
-//                                    )
+                            val idCocktails =
+                                ((requireActivity()).application as? RomApplication)?.getDataBase()
+                                    ?.getCocktailsDao()?.deleteCocktailDataById(
+                                        id.toLong()
+                                    )
+                            val k = idCocktails
                         } else {
-//                            val idCocktails =
-//                                ((requireActivity()).application as? RomApplication)?.getDataBase()
-//                                    ?.getStatisticDao()?.insertNewCocktailData(
-//                                        CocktailsDataEntity(id)
-//                                    )
-//                            val test = idCocktails
+                            val idCocktails =
+                                ((requireActivity()).application as? RomApplication)?.getDataBase()
+                                    ?.getCocktailsDao()?.insertNewCocktailData(
+                                        CocktailsDataEntity(id)
+                                    )
+                            val test = idCocktails
                         }
-
+                        
                     }
-
-//                viewModel.handleAction(Action.OnClickFavourite(it))
                 })
-
+        
         binding.rvCocktails.layoutManager = LinearLayoutManager(requireContext())
-
+        
         binding.rvCocktails.adapter = adapter
-
+        
         binding.btnRandom.setOnClickListener {
             findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailRandomFragment)
         }
-
+        
         lifecycleScope.launch {
-
+            
             viewModel.state.collect {
                 it.events.forEach { event ->
                     when (event) {
@@ -106,27 +105,26 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
                                 )
                             }
 
-//                            lifecycleScope.launch(Dispatchers.IO) {
-//                                val idCocktails =
-//                                    ((requireActivity()).application as? RomApplication)?.getDataBase()
-//                                        ?.getStatisticDao()?.getCocktailData()
-//                                        ?.map { it.idCocktail } ?: emptyList()
-//                                data.forEach { item ->
-//                                    item.isHeart = idCocktails.contains(item.id)
-//                                }
-//                            }
-
+                            lifecycleScope.launch(Dispatchers.IO) {
+                                val idCocktails =
+                                    ((requireActivity()).application as? RomApplication)?.getDataBase()
+                                        ?.getCocktailsDao()?.getCocktailData()
+                                        ?.map { it.idCocktail } ?: emptyList()
+                                data.forEach { item ->
+                                    item.isHeart = idCocktails.contains(item.id)
+                                }
+                            }
+                            
                             adapter.addData(data)
                         }
-
+                        
                         is MoveToCocktailInfo -> {
-                            findNavController().navigate(
-                                R.id.action_cocktailsListFragment_to_cocktailInfoFragment,
+                            findNavController().navigate(R.id.action_cocktailsListFragment_to_cocktailInfoFragment,
                                 Bundle().apply {
                                     putString("id", event.idDrink)
                                 })
                         }
-
+                        
                         is CocktailsState.Event.ShowError -> {
                             Toast.makeText(context, "Ups, internet is missing", LENGTH_LONG).show()
                         }
@@ -134,7 +132,7 @@ class CocktailsListFragment : BaseFragment<FragmentCocktailsListBinding, Cocktai
                 }
             }
         }
-
+        
     }
-
+    
 }

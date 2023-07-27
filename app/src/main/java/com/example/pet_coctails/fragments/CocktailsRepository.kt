@@ -2,6 +2,7 @@ package com.example.pet_coctails.fragments
 
 import com.example.pet_coctails.dataBase.CocktailsDataEntity
 import com.example.pet_coctails.features.auth.data.ListCocktailsResponse
+import kotlinx.serialization.Serializable
 
 interface CocktailsRepository {
     
@@ -16,15 +17,16 @@ interface CocktailsRepository {
 }
 
 data class CocktailSum(
-    val name: String,
-    val category: String,
-    val cocktailType: String,
-    val glass: String,
-    val instruction: String,
-    val imageLink: String,
-    val some: List<CocktailClear>,
+    val name: String = "",
+    val category: String = "",
+    val cocktailType: String = "",
+    val glass: String = "",
+    val instruction: String = "",
+    val imageLink: String = "",
+    val some: List<CocktailClear> = emptyList(),
 )
 
+@Serializable
 data class CocktailClear(
     val ingredient: String,
     val measure: String?

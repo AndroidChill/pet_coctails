@@ -37,11 +37,11 @@ class CocktailInfoViewModel @Inject constructor(
             val response = cocktailsUseCase.cocktailInfo(id)
             _state.update { oldState ->
                 oldState.copy(
+                    cocktail = response,
                     events = oldState.events + CocktailInfoState.Event.LoadFullCocktailInfo(
                         response
                     )
                 )
-
             }
         }
         
@@ -49,9 +49,8 @@ class CocktailInfoViewModel @Inject constructor(
 }
 
 data class CocktailInfoState(
-
+    val cocktail: CocktailSum = CocktailSum(),
     val events: List<Event> = emptyList()
-
 ) {
 
     sealed class Event {

@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +34,10 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
 
     override val getViewModelClass: Class<CocktailInfoViewModel>
         get() = CocktailInfoViewModel::class.java
+    
+//    private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+    
+    private var isShowBottomSheet = false
 
     override fun setupDaggerComponent() {
         val authComponent = DaggerAuthComponent.builder()
@@ -47,14 +53,15 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initUI() {
-
+        
         binding.content.setOnTouchListener { view, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
                     currentFloatY = motionEvent.y
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    if (motionEvent.y < currentFloatY) {
+                    if (motionEvent.y < currentFloatY && !isShowBottomSheet) {
+                        isShowBottomSheet = true
                         showBottomSheetDialog()
                         Log.i("scroll_test", "down")
                     }
@@ -63,6 +70,8 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
             }
             return@setOnTouchListener true
         }
+        
+        
 
 
         adapter = CocktailInfoAdapter()
@@ -116,13 +125,20 @@ class CocktailInfoFragment : BaseFragment<FragmentCocktailInfoBinding, CocktailI
         }
 
     }
+    
+    override fun onResume() {
+        super.onResume()
+        setFragmentResultListener("option") { data, bundle ->
+            if (bundle.getBoolean("is_destroy", false)) {
+                isShowBottomSheet = false
+            }
+        }
+    }
 
     private fun showBottomSheetDialog() {
 
-        val dialog = BottomSheetDialog(requireContext())
+        val dialog = BottomFragment.newInstance(viewModel.state.value.cocktail.some)
 
-        dialog.setContentView(R.layout.bottom_sheet_dialog)
-
-        dialog.show()
+        dialog.show(parentFragmentManager, dialog.tag)
     }
 }

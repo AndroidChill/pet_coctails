@@ -14,5 +14,5 @@ interface CocktailsDao {
     fun getCocktailData(): List<CocktailsDataEntity>
 
     @Query("DELETE FROM cocktails WHERE id_cocktail = :cocktailsId")
-    fun deleteCocktailDataById(cocktailsId: Long)
+    fun deleteCocktailDataById(cocktailsId: Long): Int
 }
